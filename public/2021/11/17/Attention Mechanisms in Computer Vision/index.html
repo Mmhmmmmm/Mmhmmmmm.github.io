@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Attention Mechanisms in Computer Vision A Survey | 赵江伟的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="description" content="论文地址: 2111.07624.pdf (arxiv.org)
+作者: Meng-Hao Guo , Tsinghua University
+简介
+人类可以自然有效地在复杂的场景中找到突出的区域. 在这种观察的推动下, 注意机制被引入到计算机视觉中, 目的是模仿人类视觉系统的这方面. 这种注意机制可以看作是一个基于输入图像特征的动态权值调整过程. 注意机制在图像分类、目标检测、语义分割、视频理解、图像生成、三维视觉、多模态任务和自监督学习等视觉任务中取得了巨大的成功. 本文综述了计算机视觉中的各种注意机制, 并对其进行了分类, 如通道注意、空间注意、时间注意和分支注意;一个相关的repositoryhttps://github.com/MenghaoGuo/Awesome-Vision-Attentionsis专门用于收集相关的工作. 本文还提出了注意机制研究的未来方向.">
+  
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+    
+<link rel="stylesheet" href="../../../../fancybox/jquery.fancybox-1.3.4.css">
+
+  
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  <meta name="google-site-verification" content="s7zZsgTqZwqYOoqReZl1ZE6FOOsSN0slhQFB9RTy0ag" />
+  <meta name="baidu-site-verification" content="code-yqz8yGm4Fd" />
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../../../index.html" id="logo">赵江伟的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="../../../../index.html">Home</a>
+        
+          <a class="main-nav-link" href="../../../../archives">Archives</a>
+        
+          <a class="main-nav-link" href="../../../../about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Attention Mechanisms in Computer Vision" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="" class="article-date">
+  <time class="dt-published" datetime="2021-11-17T02:48:46.000Z" itemprop="datePublished">2021-11-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Attention Mechanisms in Computer Vision A Survey
+    </h1>
+  
+
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>论文地址: <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2111.07624.pdf">2111.07624.pdf (arxiv.org)</a></p>
+<p>作者: Meng-Hao Guo , Tsinghua University</p>
+<h2 id="简介">简介</h2>
+<p>人类可以自然有效地在复杂的场景中找到突出的区域. 在这种观察的推动下, 注意机制被引入到计算机视觉中, 目的是模仿人类视觉系统的这方面. 这种注意机制可以看作是一个基于输入图像特征的动态权值调整过程. 注意机制在图像分类、目标检测、语义分割、视频理解、图像生成、三维视觉、多模态任务和自监督学习等视觉任务中取得了巨大的成功. 本文综述了计算机视觉中的各种注意机制, 并对其进行了分类, 如通道注意、空间注意、时间注意和分支注意;一个相关的repositoryhttps://github.com/MenghaoGuo/Awesome-Vision-Attentionsis专门用于收集相关的工作. 本文还提出了注意机制研究的未来方向.</p>
+<span id="more"></span>
+<h2 id="介绍">介绍</h2>
+<p>第一阶段 RAM, 第二阶段 STN , 第三阶段 CBAM和ECANet, 第四阶段 自注意力.</p>
+<table>
+<thead>
+<tr>
+<th>Attention category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Channel attention</td>
+<td>Generate attention mask across the channel domain and use it to select important channels.</td>
+</tr>
+<tr>
+<td>Spatial attention</td>
+<td>Generate attention mask across spatial domains and use it to select important spatial regions (e.g. [15], [61]) or predict the most relevant spatial position directly (e.g. [7], [31]).</td>
+</tr>
+<tr>
+<td>Temporal attention</td>
+<td>Generate attention mask in time and use it to select key frames.</td>
+</tr>
+<tr>
+<td>Branch attention</td>
+<td>Generate attention mask across the different branches and use it to select important branches.</td>
+</tr>
+<tr>
+<td>Channel &amp; spatial attention</td>
+<td>Predict channel and spatial attention masks separately (e.g. [6], [117]) or generate a joint 3-D channel, height, width attention mask directly (e.g. [118], [119]) and use it to select important features.</td>
+</tr>
+<tr>
+<td>Spatial &amp; temporal attention</td>
+<td>Compute temporal and spatial attention masks separately (e.g. [16], [130]), or produce a joint spatiotemporal attention mask (e.g. [131]), to focus on informative regions.</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/200913-535478.png" alt="attention mechaisms"></p>
+<h2 id="计算机视觉中的注意方法">计算机视觉中的注意方法</h2>
+<h3 id="一般形式">一般形式</h3>
+<div class="markdown-them-math-block">$$Attention=f(g(x),x)
+$$</div><p>其中<span class="markdown-them-math-inline">$g(x)$</span>表示注意力.</p>
+<p>以自注意力为例. 自注意力可以写为:</p>
+<div class="markdown-them-math-block">$$Q,K,V={\rm Linear} (x)\\
+g(x)={\rm Softmax}(QK)\\
+f(g(x),x)=g(x)V\\
+$$</div><p>以SE 注意力为例. 可以写为:</p>
+<div class="markdown-them-math-block">$$g(x)={\rm Sigmoid}({\rm MLP}({\rm GAP}(x)))\\
+f(g(x),x)=g(x)x
+$$</div><h3 id="channel-attention">channel attention</h3>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/200910-140477.png" alt="channel attention"></p>
+<h4 id="senet">SENet</h4>
+<div class="markdown-them-math-block">$$s=F_{se}(X,\theta)=\sigma(W_2\delta (W_1 {\rm GAP}(X)))\\
+Y=sX
+$$</div><p>由于SE块对计算资源的需求较低, 可以在每个剩余单元之后添加一个SE块[145]. 但是, SE区块也存在不足. 在挤压模块中, 全局平均池过于简单, 无法捕获复杂的全局信息. 在激励模块中, 全连通层增加了模型的复杂性. 如图4所示, 后续工作尝试提高挤压模块(如GSoP-Net[54])的输出, 通过改进激励模块(如ECANet[37])来降低模型的复杂性, 或者同时改进挤压模块和激励模块(如SRM[55]).</p>
+<h4 id="gsop-net">GSop-Net</h4>
+<div class="markdown-them-math-block">$$s=F_{gsop}(X,\theta)=\sigma(W\ {\rm RC}({\rm Cov}({\rm Conv}(X))))\\
+Y=sX
+$$</div><p><span class="markdown-them-math-inline">${\rm Conv(·)}$</span>减少了通道数量, <span class="markdown-them-math-inline">${\rm Cov(·)}$</span>计算协方差矩阵, <span class="markdown-them-math-inline">${\rm RC(·)}$</span>表示行卷积. 通过使用二阶池, <span class="markdown-them-math-inline">$GSoP$</span>块提高了在SE块上收集全局信息的能力. 然而, 这是以额外的计算为代价的. 因此, 通常在几个残留块之后添加一个<span class="markdown-them-math-inline">$GSoP$</span>块.</p>
+<h4 id="srm">SRM</h4>
+<div class="markdown-them-math-block">$$s=F_{srm}(X,\theta)=\sigma({\rm BN}({\rm CFC}({\rm SP}(X))))\\
+Y=sX
+$$</div><p>SRM块改善了挤压和激励模块, 但可以像SE块一样在每个剩余单元后添加.</p>
+<h4 id="gct">GCT</h4>
+<div class="markdown-them-math-block">$$s=F_{gct}(X,\theta)={\rm tanh}(\gamma CN(\alpha {\rm Norm}(X)))+\beta\\
+Y=sX + X
+$$</div><p>其中<span class="markdown-them-math-inline">$\alpha$</span>、<span class="markdown-them-math-inline">$beta$</span>、<span class="markdown-them-math-inline">$\gamma$</span>为可训练参数, <span class="markdown-them-math-inline">${\rm Norm(·)}$</span>表示各通道的<span class="markdown-them-math-inline">$L2$</span>-范数. <span class="markdown-them-math-inline">$CN$</span>经过通道正常化. GCT块的参数比SE块少, 而且它是轻量级的, 可以在CNN的每个卷积层之后添加.</p>
+<h4 id="ecanet">ECANet</h4>
+<div class="markdown-them-math-block">$$s=F_{eca}(X,\theta)=\sigma({\rm Conv1D}({\rm GAP}(X)))\\
+Y=sX
+$$</div><p>其中<span class="markdown-them-math-inline">${\rm Conv1D}(·)$</span>表示以k大小的<span class="markdown-them-math-inline">$kernal$</span>为跨信道域的一维卷积, 用于模拟局部跨信道交互作用. 参数决定交互的覆盖范围, 在ECA中, 内核大小自适应地从通道维数决定, 而不是通过手动调优, 使用交叉验证:</p>
+<div class="markdown-them-math-block">$$k=\psi(C)=\left|\frac{\log _{2}(C)}{\gamma}+\frac{b}{\gamma}\right|_{\text {odd }}
+$$</div><p>与SENet相比, ECANet有一个改进的激励模块, 提供了一个高效有效的块, 可以很容易地纳入各种cnn.</p>
+<h4 id="fcanet">FcaNet</h4>
+<div class="markdown-them-math-block">$$s=F_{fca}(X,\theta)=\sigma(W_2\delta [([\text{DCT} (\text{Group}(X))])])\\
+Y=sX
+$$</div><p>速度会有较为明显的提升.</p>
+<h4 id="encnet">EncNet</h4>
+<div class="markdown-them-math-block">$$e_k=\sum_{i=1}^N{e^{-s_k\left\|X_i-d_k\right\|^2}(X_i-d_k)}/\sum_{j=1}^K{e^{-s_j\left\| X_i-d_j\right\|^2}}\\
+e=\sum_{k=1}^{K}\phi(e_k)\\
+s=\sigma (We)\\
+Y=sX\\
+$$</div><p>CEM不仅增强了类相关的特征图, 而且通过合并se损失, 迫使网络平等地考虑大小物体. 由于其轻量级的架构, CEM可以应用于各种框架, 而且计算开销很低</p>
+<h4 id="bilinear-attention">Bilinear Attention</h4>
+<p>在GSoP-Net[54]之后, Fang等人[146]声称以前的注意模型只使用一阶信息, 而忽略了高阶统计信息. 因此, 他们提出了一种新的双线性注意块(双注意)来捕获每个通道内的局部成对特征交互, 同时保留空间信息.</p>
+<div class="markdown-them-math-block">$$\tilde{x}=\text{Bi}(\phi(X))=\text{Vec}(\text{UTri}(\phi(X)\phi(X)^T))\\
+\hat{x}=\omega(\text{GAP}(\tilde{x}))\varphi(\tilde{x})\\
+s=\sigma(\hat{x})\\
+Y=sX\\
+$$</div><p>双注意可以合并到任何CNN主干, 以提高其代表性的力量, 同时抑制噪声.</p>
+<h4 id="summary">summary</h4>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/202439-204980.png" alt="image-20211122202438528"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/202454-500343.png" alt="image-20211122202453058"></p>
+<h3 id="spatial-attention">Spatial Attention</h3>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/202556-498709.png" alt="image-20211122202555938"></p>
+<h4 id="ram">RAM</h4>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/211548-4899.png" alt=" Attention process in RAM"></p>
+<p>这提供了一种简单而有效的方法, 将网络集中在关键区域, 从而减少了网络执行的计算次数, 特别是在大输入的情况下, 同时提高了图像分类结果.</p>
+<h4 id="glimpse-network">Glimpse Network</h4>
+<div class="markdown-them-math-block">$$g_t=f_{image}(X)\cdot f_{loc}(l_t)\\
+r_t^{(1)}=f_{rec}^{(1)}(g_t,r_{t-1}^{(1)})\\
+r_t^{(2)}=f_{rec}^{(2)}(r_t^{(1)},r_{t-1}^{(2)})\\
+l_{t+1}=f_{emis}(r_t^{(2)})\\
+y=f_{cls}(r_t^{(1)})\\
+$$</div><h4 id="hard-and soft attention">Hard and soft attention</h4>
+<div class="markdown-them-math-block">$$e_{t,u}=f_{att}(a_i,h_{t-1})\\
+\alpha _{t,i}= \exp{(e_{t,i})}/\sum_{k=1}^L{\exp{(e_{t,k})}}\\
+z_t=\sum_{i=1}^L{\alpha_{t,i}\alpha _i}\\
+$$</div><h4 id="attention-gate">Attention Gate</h4>
+<div class="markdown-them-math-block">$$S=\sigma(\varphi(\delta(\phi_x(X)+\phi_g(G))))\\
+Y=SX
+$$</div><h4 id="stn">STN</h4>
+<div class="markdown-them-math-block">$$\left[\begin{array}{lll}
+\theta_{11} &amp; \theta_{12} &amp; \theta_{13} \\
+\theta_{21} &amp; \theta_{22} &amp; \theta_{23}
+\end{array}\right]=f_{\text {loc }}(U) \\
+\left(\begin{array}{l}
+x_{i}^{s} \\
+y_{i}^{s}
+\end{array}\right)=\left[\begin{array}{lll}
+\theta_{11} &amp; \theta_{12} &amp; \theta_{13} \\
+\theta_{21} &amp; \theta_{22} &amp; \theta_{23}
+\end{array}\right]\left(\begin{array}{c}
+x_{i}^{t} \\
+y_{i}^{t} \\
+1
+\end{array}\right)
+$$</div>
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" rel="tag">注意力机制</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E7%BB%BC%E8%BF%B0/" rel="tag">综述</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../%E4%B8%AD%E5%85%B1%E4%B8%AD%E5%A4%AE%E5%85%B3%E4%BA%8E%E5%85%9A%E7%9A%84%E7%99%BE%E5%B9%B4%E5%A5%8B%E6%96%97%E9%87%8D%E5%A4%A7%E6%88%90%E5%B0%B1%E5%92%8C%E5%8E%86%E5%8F%B2%E7%BB%8F%E9%AA%8C%E7%9A%84%E5%86%B3%E8%AE%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          中共中央关于党的百年奋斗重大成就和历史经验的决议
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhaojiangwei<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a><br>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="../../../../js/jquery-1.4.3.min.js"></script>
+
+
+  
+<script src="../../../../fancybox/jquery.fancybox-1.3.4.js"></script>
+
+
+
+
+<script src="../../../../js/script.js"></script>
+
+
+
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+  </div>
+</body>
+</html>

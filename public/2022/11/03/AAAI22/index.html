@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>AAAI22 实验全记录 | 赵江伟的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="description" content="比赛题目
+AAAI-2022 安全AI挑战者计划第八期: 以数据为中心的鲁棒机器学习-天池大赛-阿里云天池 (aliyun.com)
+提交模版示例也可参考: https://github.com/vtddggg/training_template_for_AI_challenger_sea8
+介绍
+当前的机器学习竞赛主要是基于固定的数据集去追求一个高性能的机器学习模型, 而最近的以数据为中心的人工智能竞赛 (https://https-deeplearning-ai.github.io/data-centric-comp/)改变了传统范式, 即给定固定模型旨在去改进数据集. 类似地, 在鲁棒学习方面, 已经提出了基于深度学习模型的防御方法来减轻对抗样本的潜在威胁, 但大多数方法都是在固定的约束和数据集下去追求高性能模型. 因此, 目前尚未广泛探索如何构建通用且有效的数据集来训练鲁棒模型.
+在图像分类的对抗鲁棒性研究中, 为了加快以数据为中心的相关的技术研究, 我们组织了本次比赛, 目的是开发新的以数据为中心的算法, 例如数据增强、标签细化、制造对抗性数据, 甚至设计来自其他领域的知识融合算法. 鼓励参与者自由开发新颖的想法, 找到有效的以数据为中心的技术, 以促进训练更加鲁棒的机器学习模型.">
+  
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+    
+<link rel="stylesheet" href="../../../../fancybox/jquery.fancybox-1.3.4.css">
+
+  
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  <meta name="google-site-verification" content="s7zZsgTqZwqYOoqReZl1ZE6FOOsSN0slhQFB9RTy0ag" />
+  <meta name="baidu-site-verification" content="code-yqz8yGm4Fd" />
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../../../index.html" id="logo">赵江伟的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="../../../../index.html">Home</a>
+        
+          <a class="main-nav-link" href="../../../../archives">Archives</a>
+        
+          <a class="main-nav-link" href="../../../../about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-AAAI22" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="" class="article-date">
+  <time class="dt-published" datetime="2022-11-03T03:27:06.615Z" itemprop="datePublished">2022-11-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/%E6%AF%94%E8%B5%9B/">比赛</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      AAAI22 实验全记录
+    </h1>
+  
+
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="比赛题目">比赛题目</h2>
+<p><a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/competition/entrance/531939/introduction?spm=5176.12281957.1004.1.26703eafcBnEKj">AAAI-2022 安全AI挑战者计划第八期: 以数据为中心的鲁棒机器学习-天池大赛-阿里云天池 (aliyun.com)</a></p>
+<p>提交模版示例也可参考: <a target="_blank" rel="noopener" href="https://github.com/vtddggg/training_template_for_AI_challenger_sea8">https://github.com/vtddggg/training_template_for_AI_challenger_sea8</a></p>
+<h3 id="介绍">介绍</h3>
+<p>当前的机器学习竞赛主要是基于固定的数据集去追求一个高性能的机器学习模型, 而最近的以数据为中心的人工智能竞赛 (<a target="_blank" rel="noopener" href="https://https-deeplearning-ai.github.io/data-centric-comp/">https://https-deeplearning-ai.github.io/data-centric-comp/</a>)改变了传统范式, 即给定固定模型旨在去改进数据集. 类似地, 在鲁棒学习方面, 已经提出了基于深度学习模型的防御方法来减轻对抗样本的潜在威胁, 但大多数方法都是在固定的约束和数据集下去追求高性能模型. 因此, 目前尚未广泛探索如何构建通用且有效的数据集来训练鲁棒模型.</p>
+<p>在图像分类的对抗鲁棒性研究中, 为了加快以数据为中心的相关的技术研究, 我们组织了本次比赛, 目的是开发新的以数据为中心的算法, 例如数据增强、标签细化、制造对抗性数据, 甚至设计来自其他领域的知识融合算法. 鼓励参与者自由开发新颖的想法, 找到有效的以数据为中心的技术, 以促进训练更加鲁棒的机器学习模型.</p>
+<span id="more"></span>
+<h2 id="模型和数据集">模型和数据集</h2>
+<p>本次比赛分为两个阶段.</p>
+<p>第一阶段: 我们在 CIFAR-10 上选择 2 个基线网络. 这些模型来自:</p>
+<ul>
+<li>ResNet50 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1512.03385">https://arxiv.org/abs/1512.03385</a> ----CIFAR-10</li>
+<li>DenseNet121: <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1608.06993">https://arxiv.org/abs/1608.06993</a> ----CIFAR-10</li>
+</ul>
+<p>我们使用提交文件中的数据样本和相应的标签向量来训练模型, 同时, 参与者可以指定一些训练参数, 包括优化器、权重衰减、学习率和训练轮数. 在训练阶段后, 我们使用基于 CIFAR-10 的私有测试集来评估公共排行榜上的提交.</p>
+<p>第二阶段: 第一阶段的前50名参与者将进入第二阶段. 在这个阶段, 我们将在另一个基于 CIFAR-10 的私有测试集上评估提交. 选择的模型也与第一阶段不同. **此外, 第二阶段我们只允许参与者调整训练参数, 数据样本和对应的标签向量将在第一阶段之后固定. **</p>
+<p>需要注意的是, 在第一阶段, 我们私有测试集中的部分数据点将来自CIFAR-10的基础测试集, 但我们不建议参与者尝试去包含CIFAR-10的测试集或试探私有测试集的内容. 我们将在第二阶段更改测试集. 同时, 我们将检查获奖者的最终方案. 鼓励参与者设计通用且有效的以数据为中心的技术, 以提高模型的性能.</p>
+<p>我们根据提交的数据训练模型, 得到 (越高越好) 的分类率, 其计算公式如下:</p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/200925-555423.svg+xml" alt="img"></p>
+<p>其中<img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/200929-716931.svg+xml" alt="img"> 是所有训练模型的集合, <img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/200926-222920.svg+xml" alt="img">是评估数据集.</p>
+<p>当多个提交获得相同分数时, 它们将通过数据数量进行比较 (越少越好) .</p>
+<h2 id="提交格式">提交格式</h2>
+<p>初赛阶段, 每次提交都是一个命名为Dataset.zip的压缩包, 其中压缩包中含有5个文件, 分别是data.npy, label.npy, <a target="_blank" rel="noopener" href="http://config.py/">config.py</a>, resnet50.pth, densenet121.pth. 其中data.npy包含不超过 50,000 个数据样本, 格式为50000<em>32</em>32<em>3的uint8类型数据, label.npy为相应的标签, 格式为50000</em>10的float类型数据. config.py中包含了模型的训练设置, 包括优化器、权重衰减、学习率、和训练轮数等. resnet50.pth和densenet121.pth是选手本地按照train.py文件及提交数据集训好的模型;</p>
+<p>复赛开始后数据文件不可更改, 只需要提交config.py文件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%B8%AD%E5%BF%83/" rel="tag">数据为中心</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E6%AF%94%E8%B5%9B/" rel="tag">比赛</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../bert+knowledge/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../../../2021/12/16/VQGAN/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">
+        
+          Taming Transformers for High-Resolution Image Synthesis
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhaojiangwei<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a><br>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="../../../../js/jquery-1.4.3.min.js"></script>
+
+
+  
+<script src="../../../../fancybox/jquery.fancybox-1.3.4.js"></script>
+
+
+
+
+<script src="../../../../js/script.js"></script>
+
+
+
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+  </div>
+</body>
+</html>

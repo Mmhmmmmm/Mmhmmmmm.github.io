@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>赵江伟的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="description" content="BART
+BART是Bidirectional and Auto-Regressive Transformers的简写, 来自论文: BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, ">
+  
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+    
+<link rel="stylesheet" href="../../../../fancybox/jquery.fancybox-1.3.4.css">
+
+  
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  <meta name="google-site-verification" content="s7zZsgTqZwqYOoqReZl1ZE6FOOsSN0slhQFB9RTy0ag" />
+  <meta name="baidu-site-verification" content="code-yqz8yGm4Fd" />
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../../../index.html" id="logo">赵江伟的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="../../../../index.html">Home</a>
+        
+          <a class="main-nav-link" href="../../../../archives">Archives</a>
+        
+          <a class="main-nav-link" href="../../../../about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-knowledge_bart" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="" class="article-date">
+  <time class="dt-published" datetime="2022-11-03T03:27:06.625Z" itemprop="datePublished">2022-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="bart">BART</h1>
+<p>BART是Bidirectional and Auto-Regressive Transformers的简写, 来自论文: <a href="https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1910.13461.pdf">BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension</a></p>
+<h2 id="背景:-seq2seq预训练">背景: Seq2Seq预训练</h2>
+<p>去年10月, 来自Google和Facebook的团队分别发布了新的Transformer-related论文: T5和BART.  这两篇论文在如抽象总结和对话等生成任务上都取得了更好的下游性能, 主要有两个改变:</p>
+<ul>
+<li>在BERT的双向编码器架构中添加因果解码器;</li>
+<li>用更复杂的预训练任务代替BERT的完形填空任务.</li>
+</ul>
+<h3 id="**bert-vs gpt2**"><strong>Bert vs. GPT2</strong></h3>
+<p>正如BART作者在论文中写的,</p>
+<blockquote>
+<p>(BART) can be seen as generalizing Bert (due to the bidirectional encoder) and GPT2 (with the left to right decoder).</p>
+</blockquote>
+<h3 id="**bert**"><strong>BERT</strong></h3>
+<p>ERT最重要的预训练任务是预测masked token, 并使用整个输入来获取更完全的信息以进行更准确的预测. 这对于那些允许利用位置<span class="markdown-them-math-inline">$i$</span>之后的信息来预测位置<span class="markdown-them-math-inline">$i$</span>的任务是有效的, 但是对于诸如文本生成之类的任务则没有多大用处, 这些对位置<span class="markdown-them-math-inline">$i$</span>的预测只能取决于先前生成的单词.</p>
+<p>在BERT源码中, 在预测位置<span class="markdown-them-math-inline">$i$</span>时可以使用哪些信息是由由一个称为<code>attention_mask</code>的参数来控制的,  注意掩码中的值为1表示模型在预测行的单词时可以利用的列单词的信息.</p>
+<p>下图是BERT的&quot;Fully-visible&quot; 注意力矩阵,</p>
+<p><img src="https://pic1.zhimg.com/80/v2-f964940fa1025254317a087cfb27bb0c_1440w.jpg" alt="img"></p>
+<ul>
+<li>
+<p><img src="https://pic1.zhimg.com/80/v2-ac5de7890849432e16681a881fea5e50_1440w.png" alt="img"></p>
+</li>
+<li>
+<p>优点: 本质为降噪自编码特征表示, 通过引入噪声[MASK]构建MLM, 获取上下文相关的双向特征表示;</p>
+</li>
+<li>
+<p>引入独立性假设, 为<strong>联合概率的有偏估计</strong>, 没有考虑预测[MASK]之间的相关性</p>
+</li>
+<li>
+<ul>
+<li>不适合直接处理生成任务, MLM预训练目标的设置造成预训练过程和生成过程不一致;</li>
+<li>预训练时的[MASK]噪声在finetune阶段不会出现, 造成两阶段不匹配问题;</li>
+</ul>
+</li>
+<li>
+<p>代表模型: BERT系列模型;</p>
+</li>
+</ul>
+<h3 id="**gpt**"><strong>GPT</strong></h3>
+<p>GPT预训练任务使用的是<code>autoregressive</code>的思想, 使用已经解码出的信息来预测下一个位置. 该种模式对于生成任务更为有效, 而对于那些可以使用全局输入来得到输出的下游任务则比较差劲.</p>
+<p>同样的, 给出GPT的注意力矩阵,</p>
+<p><img src="https://pic1.zhimg.com/80/v2-bdf9db30fdceb59a9d3d3a07c1a67300_1440w.jpg" alt="img"></p>
+<p>在这里, 当我们预测<code>eating</code>时, 可以使用的信息只有<code>&lt;BOS&gt; I love</code>.</p>
+<p><img src="https://pic3.zhimg.com/80/v2-4f6492d8b4303d278441bbb4c933a20a_1440w.png" alt="img"></p>
+<ul>
+<li>
+<p>优点:</p>
+</li>
+<li>
+<ul>
+<li>文本序列<strong>联合概率的密度估计</strong>, 即为传统的语言模型, 天然适合处理自然生成任务;</li>
+</ul>
+</li>
+<li>
+<p>缺点:</p>
+</li>
+<li>
+<ul>
+<li>联合概率按照文本序列从左至右分解 (<strong>顺序拆解</strong>) , 无法通过上下文信息进行双向特征表征;</li>
+</ul>
+</li>
+<li>
+<p>代表模型: ELMO/GPT1.0/GPT2.0;</p>
+</li>
+<li>
+<p>改进: XLNet将传统的自回归语言模型进行推广, 将顺序拆解变为<strong>随机拆解</strong> (排列语言模型) , 产生上下文相关的双向特征表示;</p>
+</li>
+</ul>
+<h3 id="**encoder-decoder**"><strong>Encoder-Decoder</strong></h3>
+<p>我们的新朋友, 例如BART, 可以做到两全其美.</p>
+<p>其中Encoder的注意力矩阵是<code>Fully-visible</code>的,</p>
+<p><img src="https://pic1.zhimg.com/80/v2-f964940fa1025254317a087cfb27bb0c_1440w.jpg" alt="img"></p>
+<p>而Decoder的注意力矩阵是<code>autoregressive</code>,</p>
+<p><img src="https://pic3.zhimg.com/80/v2-c1c1051fa14cc3641c0c764f0cad5b62_1440w.jpg" alt="img"></p>
+<p>编码器和解码器通过<code>cross attention</code>连接, 其中每个解码器层都对编码器输出的最终隐藏状态进行attention操作, 这会使得模型生成与原始输入紧密相关的输出.</p>
+<h3 id="transformer">transformer</h3>
+<p><img src="https://s1.ax1x.com/2020/04/25/JyCdy9.png" alt="img"></p>
+<h2 id="pre-training">Pre-training</h2>
+<ul>
+<li><strong>Token Masking</strong>: Following BERT (Devlin et al., 2019), random tokens are sampled and replaced with<code>[MASK]</code>elements.</li>
+<li><strong>Sentence Permutation</strong>: A document is divided into sentences based on full stops, and these sentences are shuffled in a random order.</li>
+<li><strong>Document Rotation</strong>: A token is chosen uniformly at random, and the document is rotated so that it begins with that token. This task trains the model to identify the start of the document.</li>
+<li><strong>Token Deletion</strong>: Random tokens are deleted from the input. In contrast to token masking, the model must decide which positions are missing inputs.</li>
+<li><strong>Text Infilling</strong>: A number of text spans are sampled, with span lengths drawn from a Poisson distribution (λ=3). Each span is replaced with a single<code>[MASK]</code>token. 0-length spans correspond to the insertion of <code>[MASK]</code> tokens. Text infilling teaches the model to predict how many tokens are missing from a span.</li>
+</ul>
+<p><img src="https://z3.ax1x.com/2021/04/06/c18o11.png#shadow" alt="img"></p>
+<h2 id="**fine-tuning**"><strong>Fine-tuning</strong></h2>
+<h3 id="sequence-classification tasks">Sequence Classification Tasks</h3>
+<p>序列分类任务中, 编码器和解码器的输入相同, 解码器 token 的最终隐藏状态被输入到多类别线性分类器中. BART 在解码器最后额外添加了一个 token, 如下图所示, 该 token 位置的输出可以被认为是该句子的 representation</p>
+<p><img src="https://pic2.zhimg.com/80/v2-869ae8f65a9f1be753a51ee2f9011f31_1440w.jpg" alt="img">在上述示例中, 原始文档为<code>A B C D E</code>. 在编码之前将文本<code>[C, D]</code>屏蔽掉, 又在B之前插入一个额外的掩码, 然后将损坏的文档<code>A _ B _ E</code>作为编码器的输入. 解码器必须使用编码器的输出和先前未损坏的标记来重建原始文档.</p>
+<h3 id="sequence-generation tasks">Sequence Generation Tasks</h3>
+<p>由于 BART 具备自回归解码器, 因此它可以针对序列生成任务进行直接微调, 如问答或者文本摘要</p>
+<h3 id="machine-translation">Machine Translation</h3>
+<p>作者采用新的随机初始化 Encoder 替换 BART 编码器的 <code>Embedding </code>层. 该模型以端到端的方式进行训练, 即训练一个新的编码器将外来词映射到输入. 新的编码器可以使用不同于原始 BART 模型的词汇. 其中随机初始化 Encoder 的训练分两步, 均需要将来自 BART 模型输出的交叉熵损失进行反向传播. 第一步, 作者冻结 BART 的大部分参数, 仅更新随机初始化的 Encoder、BART 位置嵌入和 BART 编码器第一层的自注意力输入投影矩阵. 第二步, 作者将所有模型参数进行少量迭代训练</p>
+<p><img src="https://z3.ax1x.com/2021/04/06/c1GPnf.png" alt="img"></p>
+<h2 id="**results**"><strong>Results</strong></h2>
+<p><img src="https://z3.ax1x.com/2021/04/06/c1GFHS.png" alt="img"></p>
+<p>从上表可以看出, 貌似带上 Document Rotation 或 Sentence Shuffling 效果都不是太好, 可以这么理解, 假如模型在训练的时候看到的句子顺序都是乱的, 它可能就认为这个世界的句子顺序都是乱的, 当你做测试的时候, 输入的句子是正序的, 可能模型就不知所措了. 实际上 Text Infilling 可以看作是 Token Masking+Token Deletion, 所以 Text Infilling 效果这么好也可以理解</p>
+<p><img src="https://z3.ax1x.com/2021/04/06/c1Guj0.png" alt="img"></p>
+<h2 id="应用">应用</h2>
+<h2 id="km-bart:-knowledge enhanced multimodal bart for visual commonsense generation">KM-BART: Knowledge Enhanced Multimodal BART for Visual Commonsense Generation</h2>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/23/203112-858339.png" alt="image-20211223202316964"><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2101.00419.pdf">2101.00419.pdf (arxiv.org)</a></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/23/202524-103198.png" alt="image-20211223202500339"></p>
+<p>可以看到, 整个模型的backbone就是一个BART, 为了能适配多模态输入, 论文通过在原始的BART中增加特殊的tokens来适应不同的预训练任务. 在编码器部分, 对于不同的预训练任务, 通过加入几个特殊tokens来区分不同模态的输入:</p>
+<ul>
+<li>常识生成: <code>&lt;before&gt;</code>, <code>&lt;after&gt;</code>和<code>&lt;intent&gt;</code></li>
+<li>属性和关系预测: <code>&lt;region_caption&gt;</code></li>
+<li>掩码预训练语言模型: <code>&lt;caption&gt;</code></li>
+</ul>
+<p>对于不同模态的输入, 引入几个特殊tokens:</p>
+<ul>
+<li>视觉embedding: <code>&lt;img&gt;</code>, <code>&lt;/img&gt;</code></li>
+<li>事件文本: <code>&lt;event&gt;</code>, <code>&lt;/event&gt;</code></li>
+<li>语言模型: <code>&lt;mlm&gt;</code>, <code>&lt;/mlm&gt;</code></li>
+</ul>
+<p>解码器利用类似于GPT的单向Transformer, 模型需要预测被masked的单词和被masked视觉区域的类别分布.</p>
+<p>这项研究中到底哪里用了知识图谱? 其实就在于其中一个预训练任务基于知识的常识生成任务, 这个预训练任务使用了COMET, 这是一个在常识知识图谱上得到的预训练语言模型, 所以可以看到这篇论文所谓的视觉加知识图谱其实就是在知识融入的PLM中调整输入tokens保证可以编码视觉输入数据.</p>
+<h3 id=""></h3>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../ViTGAN/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="../hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhaojiangwei<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a><br>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="../../../../js/jquery-1.4.3.min.js"></script>
+
+
+  
+<script src="../../../../fancybox/jquery.fancybox-1.3.4.js"></script>
+
+
+
+
+<script src="../../../../js/script.js"></script>
+
+
+
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+  </div>
+</body>
+</html>

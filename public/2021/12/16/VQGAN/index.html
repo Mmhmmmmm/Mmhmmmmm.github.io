@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Taming Transformers for High-Resolution Image Synthesis | 赵江伟的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="description" content="
+Abstract
+设计学习远程交互顺序数据, 变压器继续显示最先进的结果, 各种任务. 与cnn不同的是, 它们不包含优先考虑本地互动的归纳偏见. 这使得它们具有表达能力, 但在计算上也不适合长序列, 比如高分辨率图像. 我们演示了如何将cnn的归纳偏差的有效性与变压器的表现力相结合, 使它们能够">
+  
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+    
+<link rel="stylesheet" href="../../../../fancybox/jquery.fancybox-1.3.4.css">
+
+  
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  <meta name="google-site-verification" content="s7zZsgTqZwqYOoqReZl1ZE6FOOsSN0slhQFB9RTy0ag" />
+  <meta name="baidu-site-verification" content="code-yqz8yGm4Fd" />
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../../../index.html" id="logo">赵江伟的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="../../../../index.html">Home</a>
+        
+          <a class="main-nav-link" href="../../../../archives">Archives</a>
+        
+          <a class="main-nav-link" href="../../../../about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-VQGAN" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="" class="article-date">
+  <time class="dt-published" datetime="2021-12-16T07:37:36.000Z" itemprop="datePublished">2021-12-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Taming Transformers for High-Resolution Image Synthesis
+    </h1>
+  
+
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/155233-854490.png" alt="image-20211216155217239"></p>
+<h2 id="abstract">Abstract</h2>
+<p>设计学习远程交互顺序数据, 变压器继续显示最先进的结果, 各种任务. 与cnn不同的是, 它们不包含优先考虑本地互动的归纳偏见. 这使得它们具有表达能力, 但在计算上也不适合长序列, 比如高分辨率图像. 我们演示了如何将cnn的归纳偏差的有效性与变压器的表现力相结合, 使它们能够建模, 从而合成高分辨率图像. 我们展示了如何(i)使用cnn学习图像成分的context-rich词汇表, 反过来(ii)利用transformer在高分辨率图像中有效地建模它们的成分. 我们的方法很容易应用于条件合成任务, 其中非空间信息(如对象类)和空间信息(如分割)都可以控制生成的图像. 特别地, 我们给出了第一个用变换进行语义引导的百万像素图像合成的结果, 并获得了类条件ImageNet上自回归模型的最新进展.</p>
+<h2 id="approach">Approach</h2>
+<p>以前的工作[55,8]是将Transformer应用于图像生成, 对于大小为64×64pixels的图像, 结果很有希望, 但由于序列长度的成本是二次增加的, 不能简单地缩放到更高的分辨率. 高分辨率图像合成需要一个模型, 该模型能够理解图像的组成, 使其能够生成局部真实以及全局一致的模式. 因此, 我们不使用像素表示图像, 而是将其表示为一个码本中感知丰富的图像成分的组合. 通过学习一种有效的代码, 如第3.1节所述, 我们可以显著地减少合成的描述长度, 这使得我们可以有效地利用第3.2节所述的变压器架构在图像中建模它们的全局相互关系. 这种方法, 如图2所示, 能够在无条件和条件设置下生成真实和一致的高分辨率图像.</p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/160416-53601.png" alt="image-20211216160416427"></p>
+<h3 id="learning-an effective codebook of image constituents for use in transformers">Learning an Effective Codebook of Image Constituents for Use in Transformers</h3>
+<ul>
+<li>
+<p>image <span class="markdown-them-math-inline">$x\in \Bbb{R}^{h\times w\times 3}$</span> to <span class="markdown-them-math-inline">$z_q\in \Bbb{R}^{h\times w\times n_z}$</span>,<span class="markdown-them-math-inline">$n_z$</span> is the dim of codes .</p>
+</li>
+<li>
+<p>codebook <span class="markdown-them-math-inline">$Z={z_k}_{k=1}^K$</span></p>
+</li>
+<li>
+<p><span class="markdown-them-math-inline">$\hat{x}=G(z_q)$</span></p>
+</li>
+<li>
+<p><span class="markdown-them-math-inline">$\hat{z}=E(x)$</span></p>
+</li>
+<li>
+<p><span class="markdown-them-math-inline">$z_q=q(\hat{z}):=(\arg{min}_{z_k\in Z}||\hat{z}_{i,j}-z_k||)$</span></p>
+</li>
+<li>
+<p>loss <span class="markdown-them-math-inline">$L_{VQ}(E,G,Z)=||x-\hat{x}||^2+||sg[E(x)]-z_q||^2_2+||sg[z_q]-E(x)||^2_2$</span>, <span class="markdown-them-math-inline">$sg[]$</span> denotes stop-gradient operation</p>
+</li>
+</ul>
+<h4 id="learning-a perceptually rich codebook">Learning a Perceptually Rich Codebook</h4>
+<p>使用Transformer来表示图像作为潜在图像成分的分布, 需要我们推动压缩的极限和学习丰富的码本. 为此, 我们提出了vqgan, 一种原始VQV AE的变体, 并使用一个鉴别器和感知损失[40,30,39,17,47], 以在增加压缩率的情况下保持良好的感知质量. 需要注意的是, 这与之前的工作不同, 之前的工作是基于像素[71,61]和基于变压器的自回归模型[8]在一个浅层量化模型之上. 更具体地说, 我们将[72]中lrecby使用的theL2loss替换为知觉损失, 并引入一个基于补丁的判别器[28]的对抗训练程序, 目的是区分真实图像和重建图像:</p>
+<ul>
+<li>
+<p><span class="markdown-them-math-inline">$L_{GAN}(\{E, G,Z\}, D) = [logD(x) + log(1−D(\hat{x}))]$</span></p>
+</li>
+<li>
+<p><span class="markdown-them-math-inline">$Q^*=\arg{min}_{E,G,Z}{max}_{D}\Bbb{E}_{x~p(x)}[L_{VQ}(E,G,Z)+\lambda L_{GAN}(\{E,G,Z\},D)]$</span></p>
+</li>
+<li>
+<p><span class="markdown-them-math-inline">$\lambda=\frac{\nabla_{G_L}[L_rec]}{\nabla_{G_GAN}[L_rec]+\delta}$</span></p>
+</li>
+</ul>
+<h3 id="learning-the composition of images with transformers">Learning the Composition of Images with Transformers</h3>
+<h4 id="latent-transformers">Latent Transformers</h4>
+<p>Given indices <span class="markdown-them-math-inline">$s&lt;i$</span>, the transformer learns to predict the distribution of possible next indices,</p>
+<p><span class="markdown-them-math-inline">$p(s) =\prod_ip(s_i|s_{&lt;i})$</span></p>
+<p><span class="markdown-them-math-inline">$L_{Transformer}=\Bbb{E}_{x∼p(x)}[−\log{p(s)}]$</span></p>
+<h4 id="conditioned-synthesis">Conditioned Synthesis</h4>
+<p><span class="markdown-them-math-inline">$p(s) =\prod_ip(s_i|s_{&lt;i},c)$</span></p>
+<h4 id="generating-high-resolution images">Generating High-Resolution Images</h4>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162156-748526.png" alt="image-20211216161603421"></p>
+<h2 id="experiments">Experiments</h2>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162155-235067.png" alt="image-20211216161702818"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162152-181974.png" alt="image-20211216161722969"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/161755-886867.png" alt="image-20211216161755213"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/161934-917364.png" alt="image-20211216161828226"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162134-585430.png" alt="image-20211216161843590"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162326-87745.png" alt="image-20211216161859596"></p>
+<p><img src="C:%5CUsers%5CZJW%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211216161925988.png" alt="image-20211216161925988"></p>
+<h2 id="vqgan+clip">VQGAN+CLIP</h2>
+<p><img src="https://pic2.zhimg.com/v2-3840c8e97af3448fd5c529dfab9f0099_b.jpg" alt="img"></p>
+<h3 id="x-+ clip">X + CLIP</h3>
+<p>VQGAN+CLIP 只是将图像生成器与 CLIP 相结合的一个例子. 但是, 可以用任何类型的生成器替换 VQGAN, 并且根据生成器的不同, 它仍然可以很好地工作. X + CLIP 的许多变体已经出现, 例如 StyleCLIP(网址: <a href="https://link.zhihu.com/?target=https%3A//github.com/orpatashnik/StyleCLIP">https://github.com/orpatashnik/StyleCLIP</a>)  (StyleGAN + CLIP) 、 CLIPDraw(网址: <a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/2106.14843">https://arxiv.org/abs/2106.14843</a>)  (使用矢量艺术生成器) 、BigGAN + CLIP 等等. 甚至 还有使用音频而不是图像的AudioCLIP (网址: <a href="https://link.zhihu.com/?target=https%3A//github.com/AndreyGuzhov/AudioCLIP">https://github.com/AndreyGuzhov/AudioCLIP</a>).</p>
+<p><img src="https://pic1.zhimg.com/v2-b5784d58c9f081cb9b03b38373d64e28_b.jpg" alt="img"></p>
+<p>图片: 使用 StyleCLIP 进行图像编辑</p>
+<p><img src="https://pic2.zhimg.com/v2-84af8955dce4afb6440f5207fa06c1f5_b.jpg" alt="img"></p>
+<p><video src="https://vdn1.vzuu.com/SD/2742466c-d706-11eb-8bab-f2503ac034e9.mp4?disable_local_cache=1&auth_key=1639646596-0-0-ea8095168f978bae6b1b309e3aeae852&f=mp4&bu=pico&expiration=1639646596&v=hw" controls="controls" width="500" height="300">您的浏览器不支持播放该视频! </video></p>
+<p>加上 “3D photo inpainting” 竟然可以生成立体构图</p>
+<p><video src="https://vdn1.vzuu.com/SD/275462ac-d706-11eb-85e2-da1003eb494f.mp4?disable_local_cache=1&auth_key=1639646587-0-0-543317f3d824b504110b69533397a7ef&f=mp4&bu=pico&expiration=1639646587&v=hw" controls="controls" width="500" height="300">您的浏览器不支持播放该视频! </video></p>
+<p>甚至能用来猜猜那些从未露面的大佬们, 比如神秘的比特币之父中本聪</p>
+<p><img src="https://pic2.zhimg.com/v2-4b7380f37007bd92247ae617bfc82759_b.jpg" alt="img"></p>
+<p><video class="ztext-gif GifPlayer-gif2mp4" src="https://vdn3.vzuu.com/SD/273a65e6-d706-11eb-bcd2-da8b61ae19d4.mp4?disable_local_cache=1&amp;auth_key=1639646772-0-0-242d526345d82199ec642124f801faee&amp;f=mp4&amp;bu=pico&amp;expiration=1639646772&amp;v=tx" data-thumbnail="https://pic3.zhimg.com/v2-282a872f4ba46f4b46b760d3d89af9d2_b.jpg" poster="https://pic3.zhimg.com/v2-282a872f4ba46f4b46b760d3d89af9d2_b.jpg" data-size="normal" preload="metadata" loop="" playsinline=""></video></p>
+<p><video class="_1k7bcr7" preload="metadata" playsinline="" webkit-playsinline="" x-webkit-airplay="deny" src="https://vdn1.vzuu.com/LD/bbd326b4-3aea-11ec-8592-66e4ae02c6b3-v4_t111-vlbchuzBoD.mp4?disable_local_cache=1&amp;auth_key=1639646964-0-0-0fef7b84e785ae5552df3de6253fec88&amp;f=mp4&amp;bu=http-com&amp;expiration=1639646964&amp;v=hw" style="object-fit: contain;"></video></p>
+<p><img src="https://pic2.zhimg.com/v2-9a1cdb24655534997792c2aff7c6e7dd_b.jpg" alt="img"></p>
+<h2 id="vqgan+transformer">VQGAN+transformer</h2>
+<p>dall-e+VQGAN</p>
+<p><img src="https://user-images.githubusercontent.com/3994972/125195424-248ac280-e21b-11eb-8231-cd9cede6d549.png" alt="coco_trained"></p>
+<p><img src="https://user-images.githubusercontent.com/3994972/125196859-12138780-e221-11eb-8c63-a5ffef6615e8.png" alt="cocosamples2"></p>
+<p><img src="https://user-images.githubusercontent.com/12422441/113150373-f76b6300-926e-11eb-86cc-3d920da2f46b.png" alt="image"></p>
+<p><img src="https://user-images.githubusercontent.com/12422441/113150647-40bbb280-926f-11eb-8975-55968e2afb09.png" alt="image"></p>
+<p><img src="C:%5CUsers%5CZJW%5CDownloads%5Cprogress.png" alt="progress"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Transformer/" rel="tag">Transformer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/codebook/" rel="tag">codebook</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95/" rel="tag">生成算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../../../../2022/11/03/AAAI22/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          AAAI22 实验全记录
+        
+      </div>
+    </a>
+  
+  
+    <a href="../../14/Multimodal%20Conditional%20Image%20Synthesis%20with%20Product-of-Experts%20GANs/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">
+        
+          Multimodal Conditional Image Synthesis with Product-of-Experts GANs
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhaojiangwei<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a><br>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="../../../../js/jquery-1.4.3.min.js"></script>
+
+
+  
+<script src="../../../../fancybox/jquery.fancybox-1.3.4.js"></script>
+
+
+
+
+<script src="../../../../js/script.js"></script>
+
+
+
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+  </div>
+</body>
+</html>
