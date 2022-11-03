@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Delta-GAN-Encoder | 赵江伟的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <meta name="description" content="https://arxiv.org/pdf/2111.08419.pdf
+作者: Nir Diamant
+单位: Technion - Israel Institute of Technology
+摘要
+理解和控制生成模型的潜在空间是一项复杂的任务. 在本文中, 我们提出了一种新的学习方法来控制预训练GAN的潜在空间中的任何期望属性, 以便相应地编辑合成的和真实的数据样本. 我们进行Sim2Real learning, 依靠最小的样本来实现无限数量的连续精确编辑. 我们提出了一个基于Autoencoder的模型, 该模型学习编码图像之间变化的语义, 作为后来编辑新样本的基础, 实现精确的期望结果. 虽然以前的编辑方法依赖于潜在空间的已知结构(例如, StyleGAN中某些语义的线性), 但我们的方法本质上不需要任何结构约束. 我们在面部图像领域演示了我们的方法:编辑不同的表情、姿势和照明属性, 实现最先进的结果.">
+  
+  
+  
+    <link rel="shortcut icon" href="../../../../favicon.ico">
+  
+  
+    
+<link rel="stylesheet" href="../../../../fancybox/jquery.fancybox-1.3.4.css">
+
+  
+  
+<link rel="stylesheet" href="../../../../css/style.css">
+
+  <meta name="google-site-verification" content="s7zZsgTqZwqYOoqReZl1ZE6FOOsSN0slhQFB9RTy0ag" />
+  <meta name="baidu-site-verification" content="code-yqz8yGm4Fd" />
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="../../../../index.html" id="logo">赵江伟的博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="../../../../index.html">Home</a>
+        
+          <a class="main-nav-link" href="../../../../archives">Archives</a>
+        
+          <a class="main-nav-link" href="../../../../about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Delta-GAN-Encoder" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="" class="article-date">
+  <time class="dt-published" datetime="2021-11-18T10:08:21.000Z" itemprop="datePublished">2021-11-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="../../../../categories/%E8%AE%BA%E6%96%87/">论文</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Delta-GAN-Encoder
+    </h1>
+  
+
+      </header>
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2111.08419.pdf">https://arxiv.org/pdf/2111.08419.pdf</a></p>
+<p>作者: Nir Diamant</p>
+<p>单位: Technion - Israel Institute of Technology</p>
+<h2 id="摘要">摘要</h2>
+<p>理解和控制生成模型的潜在空间是一项复杂的任务. 在本文中, 我们提出了一种新的学习方法来控制预训练GAN的潜在空间中的任何期望属性, 以便相应地编辑合成的和真实的数据样本. 我们进行Sim2Real learning, 依靠最小的样本来实现无限数量的连续精确编辑. 我们提出了一个基于Autoencoder的模型, 该模型学习编码图像之间变化的语义, 作为后来编辑新样本的基础, 实现精确的期望结果. 虽然以前的编辑方法依赖于潜在空间的已知结构(例如, StyleGAN中某些语义的线性), 但我们的方法本质上不需要任何结构约束. 我们在面部图像领域演示了我们的方法:编辑不同的表情、姿势和照明属性, 实现最先进的结果.</p>
+<span id="more"></span>
+<h2 id="motivation">motivation</h2>
+<ul>
+<li>语义控制不连续, 或者存在部分纠缠</li>
+<li>真实世界中派生的数据集包含相同的样本, 只是不同于特定的属性, 这可能有助于精确属性的定义和推断, 尽管这几乎是不可能实现的.</li>
+</ul>
+<h2 id="contribution">contribution</h2>
+<ul>
+<li>允许编辑图像具有无限的特异性, 不受属性纠缠的阻碍, 学习隔离不同的语义.</li>
+<li>学习语义的行为, 不需要任何结构约束, 允许它在潜在空间中找到编辑的精确非线性路径.</li>
+</ul>
+<h2 id="approach">approach</h2>
+<p>给定一个图片<span class="markdown-them-math-inline">$A_i$</span>, 寻找隐空间<span class="markdown-them-math-inline">$a_j\in W^+$</span>在预训练的生成对抗网络当中得到图片 <span class="markdown-them-math-inline">$A_j$</span>.</p>
+<p>首先学习<span class="markdown-them-math-inline">$\Delta_{i,j}$</span> 一个表示语义的低维矩阵, 然后将其结合到<span class="markdown-them-math-inline">$a_i\in W^+$</span>中得到期望的结果. 两部分一起学习.</p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/201035-979609.png" alt="模型框架"></p>
+<p>为了监督学习<span class="markdown-them-math-inline">$\Delta$</span>-s, 创建了一个由女性和男性的合成3D模型生成. 数据集分为两类, <span class="markdown-them-math-inline">$A_1,A_2,...,A_n$</span>和<span class="markdown-them-math-inline">$B_1.B_2,...,B_n$</span>一个属性延序列变化, 而其他属性保持不变. 然后将<span class="markdown-them-math-inline">$A_i$</span>和<span class="markdown-them-math-inline">$B_i$</span>投影到隐空间矩阵<span class="markdown-them-math-inline">$a_i$</span>和<span class="markdown-them-math-inline">$b_i$</span>.</p>
+<p>模型基于Autoencoder架构,</p>
+<p><span class="markdown-them-math-inline">$\Delta_{i,j}=E(a_i,a_j)$</span></p>
+<p><span class="markdown-them-math-inline">$\hat{b_j}=D(b_i,\Delta _{i,j})+b_i$</span></p>
+<p><span class="markdown-them-math-inline">$l_{\text {residual }}=\lambda_{1} \cdot\left\|\mathbf{a}_{j}-\hat{\mathbf{a}_{j}}\right\|_{2}^{2}+\lambda_{2} \cdot\left\|\mathbf{b}_{j}-\hat{\mathbf{b}_{j}}\right\|_{2}^{2}$</span></p>
+<p>前半部分是当前输入图片的损失, 后边是其他语义未知图片的偏移的损失.</p>
+<p>为了防止过拟合加入噪声<span class="markdown-them-math-inline">$\left\{\begin{array}{l}
+\mathbf{a}_{i} \leftarrow \mathbf{a}_{i}+\mathbf{n}_{\mathbf{a}} \\
+\mathbf{b}_{i} \leftarrow \mathbf{b}_{i}+\mathbf{n}_{\mathbf{b}}
+\end{array}\right.$</span></p>
+<p><span class="markdown-them-math-inline">$\hat{\mathbf{b}}_{j}=D\left(E\left(\mathbf{a}_{i}+\mathbf{n}_{\mathbf{a}}, \mathbf{a}_{j}+\mathbf{n}_{\mathbf{a}}\right), \mathbf{b}_{i}+\mathbf{n}_{\mathbf{b}}\right)+\mathbf{b}_{i}$</span></p>
+<p><span class="markdown-them-math-inline">$D\left(\mathbf{a}_{k}, \alpha \cdot \Delta_{i, j}\right)=\hat{\mathbf{a}}_{k+\alpha \cdot(j-i)}$</span> 下标对应图像偏移</p>
+<h2 id="experiment">experiment</h2>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/201037-163564.png" alt="效果"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/201039-2700.png" alt="FID和CS"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/201043-259747.png" alt="PCA降维分析变量变化量"></p>
+<p>发现其并不是直线变化.</p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/201045-246571.png" alt="PCA降维后的空间分布"></p>
+<p><span class="markdown-them-math-inline">$\Delta$</span>-s空间降维结果好, 说明解耦效果好.</p>
+<h2 id="method-limitations">Method Limitations</h2>
+<p>最后, 我们展示了几个我们的模型未能实现其确切目标的情况, 导致一些纠缠的属性变化. 未能达到目标形象可能有几个原因:</p>
+<ul>
+<li>图像在语义意义上不完美地投射到潜在空间.</li>
+<li>GAN训练数据表达的不寻常性. 失败的情况可能表明, 一些属性需要比其他属性更费力的努力来解开.</li>
+</ul>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/201046-449913.png" alt="image-20211118222058251"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/201048-583008.png" alt="image-20211118222107475"></p>
+<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/22/201049-86545.png" alt="image-20211118222112986"></p>
+<h2 id="想法">想法</h2>
+<p>通过将原来的因变量通过encoder降维到<span class="markdown-them-math-inline">$\Delta $</span>-s空间想要实现接纠缠, 然后再将<span class="markdown-them-math-inline">$\Delta $</span>-s空间的移动投射到因变量空间. 其中的关键点便是得到<span class="markdown-them-math-inline">$\Delta $</span>-s空间的移动, 使用了人造合成的图像去引导. 结果较差的可能为<span class="markdown-them-math-inline">$\Delta $</span>-s空间也未必是线性. 可以参考李群的VAE论文:happy:.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E8%A7%A3%E7%BA%A0%E7%BC%A0/" rel="tag">解纠缠</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/%E9%9D%A2%E9%83%A8%E7%BC%96%E8%BE%91/" rel="tag">面部编辑</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="../../20/594.%20%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          594. 最长和谐子序列
+        
+      </div>
+    </a>
+  
+  
+    <a href="../SeCGAN/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">
+        
+          SeCGAN: Parallel Conditional Generative Adversarial Networks for Face Editing via Semantic Consistency
+        
+      </div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Zhaojiangwei<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a><br>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="../../../../index.html" class="mobile-nav-link">Home</a>
+  
+    <a href="../../../../archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="../../../../about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+
+
+<script src="../../../../js/jquery-1.4.3.min.js"></script>
+
+
+  
+<script src="../../../../fancybox/jquery.fancybox-1.3.4.js"></script>
+
+
+
+
+<script src="../../../../js/script.js"></script>
+
+
+
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
+
+  </div>
+</body>
+</html>
