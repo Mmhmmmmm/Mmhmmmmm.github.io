@@ -112,4 +112,4 @@ theme: mashiro
 deploy:
   type: git
   repository: git@github.com:Mmhmmmmm/Mmhmmmmm.github.io.git
-  branch: master
+  branch: main
