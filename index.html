@@ -1,743 +1,692 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>赵江伟的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  
-  
-    <link rel="shortcut icon" href="/favicon.ico">
-  
-  
-    
-<link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css">
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Haofan Wang graduated from Electric and Computer Engineering at CMU.">
+    <meta name="author" content="Haofan Wang">
+    <meta name="keywords" content="Haofan Wang,Computer,Vision,Machine,Learning,Robotics">
 
-  
-  
-<link rel="stylesheet" href="css/style.css">
+    <!-- favicon -->
+    <link href="favicon.png" rel=icon>
 
-  <meta name="google-site-verification" content="s7zZsgTqZwqYOoqReZl1ZE6FOOsSN0slhQFB9RTy0ag" />
-  <meta name="baidu-site-verification" content="code-yqz8yGm4Fd" />
-<meta name="generator" content="Hexo 5.4.0"></head>
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="index.html" id="logo">赵江伟的博客</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="index.html">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-          <a class="main-nav-link" href="/about">About</a>
-        
+      ga('create', 'UA-104092499-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics -->
+
+    <!-- bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- font-awesome -->
+    <link href="css/fontawesome.min.css" rel="stylesheet">
+    <link href="css/solid.min.css" rel="stylesheet">
+    <link href="css/brands.min.css" rel="stylesheet">
+
+    <!-- academicons -->
+    <link href="css/academicons.min.css" rel="stylesheet">
+
+    <!-- Style CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <title>Haofan Wang</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
+        <!-- Navbar content -->
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><serif>Haofan Wang</serif></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="#home">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Links
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-xl-left" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#bio">Biography</a>
+                  <a class="dropdown-item" href="#pub">Publications</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
-      <nav id="sub-nav">
-        
-      </nav>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-VQGAN" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/12/16/VQGAN/" class="article-date">
-  <time class="dt-published" datetime="2021-12-16T07:37:36.000Z" itemprop="datePublished">2021-12-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E8%AE%BA%E6%96%87/">论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/12/16/VQGAN/">Taming Transformers for High-Resolution Image Synthesis</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/155233-854490.png" alt="image-20211216155217239"></p>
-<h2 id="abstract">Abstract</h2>
-<p>设计学习远程交互顺序数据, 变压器继续显示最先进的结果, 各种任务. 与cnn不同的是, 它们不包含优先考虑本地互动的归纳偏见. 这使得它们具有表达能力, 但在计算上也不适合长序列, 比如高分辨率图像. 我们演示了如何将cnn的归纳偏差的有效性与变压器的表现力相结合, 使它们能够建模, 从而合成高分辨率图像. 我们展示了如何(i)使用cnn学习图像成分的context-rich词汇表, 反过来(ii)利用transformer在高分辨率图像中有效地建模它们的成分. 我们的方法很容易应用于条件合成任务, 其中非空间信息(如对象类)和空间信息(如分割)都可以控制生成的图像. 特别地, 我们给出了第一个用变换进行语义引导的百万像素图像合成的结果, 并获得了类条件ImageNet上自回归模型的最新进展.</p>
-<h2 id="approach">Approach</h2>
-<p>以前的工作[55,8]是将Transformer应用于图像生成, 对于大小为64×64pixels的图像, 结果很有希望, 但由于序列长度的成本是二次增加的, 不能简单地缩放到更高的分辨率. 高分辨率图像合成需要一个模型, 该模型能够理解图像的组成, 使其能够生成局部真实以及全局一致的模式. 因此, 我们不使用像素表示图像, 而是将其表示为一个码本中感知丰富的图像成分的组合. 通过学习一种有效的代码, 如第3.1节所述, 我们可以显著地减少合成的描述长度, 这使得我们可以有效地利用第3.2节所述的变压器架构在图像中建模它们的全局相互关系. 这种方法, 如图2所示, 能够在无条件和条件设置下生成真实和一致的高分辨率图像.</p>
-<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/160416-53601.png" alt="image-20211216160416427"></p>
-<h3 id="learning-an effective codebook of image constituents for use in transformers">Learning an Effective Codebook of Image Constituents for Use in Transformers</h3>
-<ul>
-<li>
-<p>image <span class="markdown-them-math-inline">$x\in \Bbb{R}^{h\times w\times 3}$</span> to <span class="markdown-them-math-inline">$z_q\in \Bbb{R}^{h\times w\times n_z}$</span>,<span class="markdown-them-math-inline">$n_z$</span> is the dim of codes .</p>
-</li>
-<li>
-<p>codebook <span class="markdown-them-math-inline">$Z={z_k}_{k=1}^K$</span></p>
-</li>
-<li>
-<p><span class="markdown-them-math-inline">$\hat{x}=G(z_q)$</span></p>
-</li>
-<li>
-<p><span class="markdown-them-math-inline">$\hat{z}=E(x)$</span></p>
-</li>
-<li>
-<p><span class="markdown-them-math-inline">$z_q=q(\hat{z}):=(\arg{min}_{z_k\in Z}||\hat{z}_{i,j}-z_k||)$</span></p>
-</li>
-<li>
-<p>loss <span class="markdown-them-math-inline">$L_{VQ}(E,G,Z)=||x-\hat{x}||^2+||sg[E(x)]-z_q||^2_2+||sg[z_q]-E(x)||^2_2$</span>, <span class="markdown-them-math-inline">$sg[]$</span> denotes stop-gradient operation</p>
-</li>
-</ul>
-<h4 id="learning-a perceptually rich codebook">Learning a Perceptually Rich Codebook</h4>
-<p>使用Transformer来表示图像作为潜在图像成分的分布, 需要我们推动压缩的极限和学习丰富的码本. 为此, 我们提出了vqgan, 一种原始VQV AE的变体, 并使用一个鉴别器和感知损失[40,30,39,17,47], 以在增加压缩率的情况下保持良好的感知质量. 需要注意的是, 这与之前的工作不同, 之前的工作是基于像素[71,61]和基于变压器的自回归模型[8]在一个浅层量化模型之上. 更具体地说, 我们将[72]中lrecby使用的theL2loss替换为知觉损失, 并引入一个基于补丁的判别器[28]的对抗训练程序, 目的是区分真实图像和重建图像:</p>
-<ul>
-<li>
-<p><span class="markdown-them-math-inline">$L_{GAN}(\{E, G,Z\}, D) = [logD(x) + log(1−D(\hat{x}))]$</span></p>
-</li>
-<li>
-<p><span class="markdown-them-math-inline">$Q^*=\arg{min}_{E,G,Z}{max}_{D}\Bbb{E}_{x~p(x)}[L_{VQ}(E,G,Z)+\lambda L_{GAN}(\{E,G,Z\},D)]$</span></p>
-</li>
-<li>
-<p><span class="markdown-them-math-inline">$\lambda=\frac{\nabla_{G_L}[L_rec]}{\nabla_{G_GAN}[L_rec]+\delta}$</span></p>
-</li>
-</ul>
-<h3 id="learning-the composition of images with transformers">Learning the Composition of Images with Transformers</h3>
-<h4 id="latent-transformers">Latent Transformers</h4>
-<p>Given indices <span class="markdown-them-math-inline">$s&lt;i$</span>, the transformer learns to predict the distribution of possible next indices,</p>
-<p><span class="markdown-them-math-inline">$p(s) =\prod_ip(s_i|s_{&lt;i})$</span></p>
-<p><span class="markdown-them-math-inline">$L_{Transformer}=\Bbb{E}_{x∼p(x)}[−\log{p(s)}]$</span></p>
-<h4 id="conditioned-synthesis">Conditioned Synthesis</h4>
-<p><span class="markdown-them-math-inline">$p(s) =\prod_ip(s_i|s_{&lt;i},c)$</span></p>
-<h4 id="generating-high-resolution images">Generating High-Resolution Images</h4>
-<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162156-748526.png" alt="image-20211216161603421"></p>
-<h2 id="experiments">Experiments</h2>
-<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162155-235067.png" alt="image-20211216161702818"></p>
-<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162152-181974.png" alt="image-20211216161722969"></p>
-<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/161755-886867.png" alt="image-20211216161755213"></p>
-<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/161934-917364.png" alt="image-20211216161828226"></p>
-<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162134-585430.png" alt="image-20211216161843590"></p>
-<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202112/16/162326-87745.png" alt="image-20211216161859596"></p>
-<p><img src="C:%5CUsers%5CZJW%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20211216161925988.png" alt="image-20211216161925988"></p>
-<h2 id="vqgan+clip">VQGAN+CLIP</h2>
-<p><img src="https://pic2.zhimg.com/v2-3840c8e97af3448fd5c529dfab9f0099_b.jpg" alt="img"></p>
-<h3 id="x-+ clip">X + CLIP</h3>
-<p>VQGAN+CLIP 只是将图像生成器与 CLIP 相结合的一个例子. 但是, 可以用任何类型的生成器替换 VQGAN, 并且根据生成器的不同, 它仍然可以很好地工作. X + CLIP 的许多变体已经出现, 例如 StyleCLIP(网址: <a href="https://link.zhihu.com/?target=https%3A//github.com/orpatashnik/StyleCLIP">https://github.com/orpatashnik/StyleCLIP</a>)  (StyleGAN + CLIP) 、 CLIPDraw(网址: <a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/2106.14843">https://arxiv.org/abs/2106.14843</a>)  (使用矢量艺术生成器) 、BigGAN + CLIP 等等. 甚至 还有使用音频而不是图像的AudioCLIP (网址: <a href="https://link.zhihu.com/?target=https%3A//github.com/AndreyGuzhov/AudioCLIP">https://github.com/AndreyGuzhov/AudioCLIP</a>).</p>
-<p><img src="https://pic1.zhimg.com/v2-b5784d58c9f081cb9b03b38373d64e28_b.jpg" alt="img"></p>
-<p>图片: 使用 StyleCLIP 进行图像编辑</p>
-<p><img src="https://pic2.zhimg.com/v2-84af8955dce4afb6440f5207fa06c1f5_b.jpg" alt="img"></p>
-<p><video src="https://vdn1.vzuu.com/SD/2742466c-d706-11eb-8bab-f2503ac034e9.mp4?disable_local_cache=1&auth_key=1639646596-0-0-ea8095168f978bae6b1b309e3aeae852&f=mp4&bu=pico&expiration=1639646596&v=hw" controls="controls" width="500" height="300">您的浏览器不支持播放该视频! </video></p>
-<p>加上 “3D photo inpainting” 竟然可以生成立体构图</p>
-<p><video src="https://vdn1.vzuu.com/SD/275462ac-d706-11eb-85e2-da1003eb494f.mp4?disable_local_cache=1&auth_key=1639646587-0-0-543317f3d824b504110b69533397a7ef&f=mp4&bu=pico&expiration=1639646587&v=hw" controls="controls" width="500" height="300">您的浏览器不支持播放该视频! </video></p>
-<p>甚至能用来猜猜那些从未露面的大佬们, 比如神秘的比特币之父中本聪</p>
-<p><img src="https://pic2.zhimg.com/v2-4b7380f37007bd92247ae617bfc82759_b.jpg" alt="img"></p>
-<p><video class="ztext-gif GifPlayer-gif2mp4" src="https://vdn3.vzuu.com/SD/273a65e6-d706-11eb-bcd2-da8b61ae19d4.mp4?disable_local_cache=1&amp;auth_key=1639646772-0-0-242d526345d82199ec642124f801faee&amp;f=mp4&amp;bu=pico&amp;expiration=1639646772&amp;v=tx" data-thumbnail="https://pic3.zhimg.com/v2-282a872f4ba46f4b46b760d3d89af9d2_b.jpg" poster="https://pic3.zhimg.com/v2-282a872f4ba46f4b46b760d3d89af9d2_b.jpg" data-size="normal" preload="metadata" loop="" playsinline=""></video></p>
-<p><video class="_1k7bcr7" preload="metadata" playsinline="" webkit-playsinline="" x-webkit-airplay="deny" src="https://vdn1.vzuu.com/LD/bbd326b4-3aea-11ec-8592-66e4ae02c6b3-v4_t111-vlbchuzBoD.mp4?disable_local_cache=1&amp;auth_key=1639646964-0-0-0fef7b84e785ae5552df3de6253fec88&amp;f=mp4&amp;bu=http-com&amp;expiration=1639646964&amp;v=hw" style="object-fit: contain;"></video></p>
-<p><img src="https://pic2.zhimg.com/v2-9a1cdb24655534997792c2aff7c6e7dd_b.jpg" alt="img"></p>
-<h2 id="vqgan+transformer">VQGAN+transformer</h2>
-<p>dall-e+VQGAN</p>
-<p><img src="https://user-images.githubusercontent.com/3994972/125195424-248ac280-e21b-11eb-8231-cd9cede6d549.png" alt="coco_trained"></p>
-<p><img src="https://user-images.githubusercontent.com/3994972/125196859-12138780-e221-11eb-8c63-a5ffef6615e8.png" alt="cocosamples2"></p>
-<p><img src="https://user-images.githubusercontent.com/12422441/113150373-f76b6300-926e-11eb-86cc-3d920da2f46b.png" alt="image"></p>
-<p><img src="https://user-images.githubusercontent.com/12422441/113150647-40bbb280-926f-11eb-8975-55968e2afb09.png" alt="image"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/Transformer/" rel="tag">Transformer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/codebook/" rel="tag">codebook</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E7%94%9F%E6%88%90%E7%AE%97%E6%B3%95/" rel="tag">生成算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Multimodal Conditional Image Synthesis with Product-of-Experts GANs" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/12/14/Multimodal%20Conditional%20Image%20Synthesis%20with%20Product-of-Experts%20GANs/" class="article-date">
-  <time class="dt-published" datetime="2021-12-14T07:57:15.000Z" itemprop="datePublished">2021-12-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E8%AE%BA%E6%96%87/">论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/12/14/Multimodal%20Conditional%20Image%20Synthesis%20with%20Product-of-Experts%20GANs/">Multimodal Conditional Image Synthesis with Product-of-Experts GANs</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://deepimagination.cc/PoE-GAN/">Multimodal Conditional Image Synthesis with Product-of-Experts GANs (deepimagination.cc)</a></p>
-<h2 id="abstract">Abstract</h2>
-<p>现有的条件图像合成框架基于单一模式的用户输入生成图像, 例如文本、分割、草图或样式参考. 当可用时, 它们通常无法利用多模态用户输入, 这降低了它们的实用性. 为了解决这一限制, 我们提出了 Product-of-Experts Generative Adversarial Networks (PoE-GAN) 框架, 该框架可以合成基于多个输入模式或其中任意子集(甚至空集)的图像. PoE-GAN由 product-of-experts  generator和多模态多尺度投影鉴别器组成. 通过我们精心设计的训练方案, PoE-GAN学会了合成高质量和多样性的图像. 除了在多模态条件图像合成方面的进步, PoE-GAN在单模态环境下的测试结果也优于现有的最佳单模态条件图像合成方法.</p>
-<h2 id="product-of-experts-gans">Product-of-experts GANs</h2>
-<ul>
-<li>images <span class="markdown-them-math-inline">$x$</span> paired with <span class="markdown-them-math-inline">$M$</span> different input modalities <span class="markdown-them-math-inline">$(y_1,y_2,...,y_M)$</span></li>
-</ul>
-<h3 id="product-of-experts-modeling">Product-of-experts modeling</h3>
-<p>…</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/text-to-image/" rel="tag">text to image</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/" rel="tag">生成模型</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-NÜWA Visual Synthesis Pre-training forNeural visUalWorld creAtion" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/11/28/N%C3%9CWA%20Visual%20Synthesis%20Pre-training%20forNeural%20visUalWorld%20creAtion/" class="article-date">
-  <time class="dt-published" datetime="2021-11-28T06:22:55.000Z" itemprop="datePublished">2021-11-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E8%AE%BA%E6%96%87/">论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/11/28/N%C3%9CWA%20Visual%20Synthesis%20Pre-training%20forNeural%20visUalWorld%20creAtion/">NÜWA Visual Synthesis Pre-training for Neural visual world creation</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="3d-data representation">3D Data Representation</h2>
-<p>unified 3D notation <span class="markdown-them-math-inline">$X\in \Bbb{R}^{h\times w\times s\times d}$</span>, <span class="markdown-them-math-inline">$h$</span> and <span class="markdown-them-math-inline">$w$</span> denote the number of tokens in spatial axis <span class="markdown-them-math-inline">$s$</span> denotes the number of tokens in the temporal axis , <span class="markdown-them-math-inline">$d$</span> is the dim of each token.</p>
-<ul>
-<li>
-<p>text use lower-cased byte pair encoding (BPE) to token and embed them to <span class="markdown-them-math-inline">$\Bbb{R}^{1\times 1\times s\times d}$</span></p>
-</li>
-<li>
-<p>images  using 1D VQ-GAN to encode to <span class="markdown-them-math-inline">$\Bbb{R}^{h\times w\times 1\times d}$</span></p>
-</li>
-<li>
-<p>video using 2D VQ-GAN to encode to <span class="markdown-them-math-inline">$\Bbb{R}^{h\times w\times s\times d}$</span></p>
-</li>
-</ul>
-<h2 id="3d-nearby self-attention">3D Nearby Self-Attention</h2>
-<p>a coordinate <span class="markdown-them-math-inline">$(i,j,k)$</span> under <span class="markdown-them-math-inline">$X$</span> ,<span class="markdown-them-math-inline">$(\lfloor i \frac{h'}{h} \rfloor,\lfloor j \frac{w'}{w} \rfloor,\lfloor k \frac{s'}{s} \rfloor)$</span>,  a width, height and temporal extent <span class="markdown-them-math-inline">$e^w,e^h,e^s\in \Bbb{R}^+$</span>.</p>
-<div class="markdown-them-math-block">$$N^{(i,j,k)}=\left\{ C_{abc}| \left|a-i' \right|\le e^h,\left|b-j' \right|\le e^w,\left|c-k' \right|\le e^s\right\}\in \Bbb{R}^{e^h\times e^w\times e^s \times d^{in}}
-$$</div><div class="markdown-them-math-block">$$Q^{(i,j,k)}=XW^Q\\K^{(i,j,k)}=N^{(i,j,k)}W^K\\V^{(i,j,k)}=N^{(i,j,k)}W^V\\y_{ijk}=softmax(\frac{(Q^{(i,j,k)})^TK^{(i,j,k)}}{\sqrt{d^{in}}})V^{(i,j,k)}
-$$</div><h2 id="3d-encoder-decoder">3D Encoder-Decoder</h2>
-<div class="markdown-them-math-block">$$Y_{i j k}:=Y_{i j k}+P_{i}^{h}+P_{j}^{w}+P_{k}^{s}\\
-C_{i j k}:=C_{i j k}+P_{i}^{h^{\prime}}+P_{j}^{w^{\prime}}+P_{k}^{s^{\prime}}
-$$</div><div class="markdown-them-math-block">$$C^{(l)}=3DNA(C^{(l-1)},c^{(l-1)})
-$$</div><div class="markdown-them-math-block">$$Y^{(l)}_{ijk}=3DNA(Y^{l-1}_{&lt;i,&lt;j,&lt;k},Y^{l-1}_{&lt;i,&lt;j,&lt;k})+3DNA(Y^{l-1}_{&lt;i,&lt;j,&lt;k},C^{L})
-$$</div><p>inital <span class="markdown-them-math-inline">$V^{(1)}_{0,0,0}$</span> is a special <code>&lt; bos &gt;</code> token learned</p>
-<p><img src="https://gitee.com/ZhaoJW11/typroimg/raw/master/image/202111/28/162124-463286.png" alt="image-20211128160612935"></p>
-<h2 id="implementation-details">Implementation Details</h2>
-<ul>
-<li>text <span class="markdown-them-math-inline">$(e^w,e^h,e^s)=(1,1,\infty)$</span> <span class="markdown-them-math-inline">$1,1,77,1280$</span></li>
-<li>image <span class="markdown-them-math-inline">$(e^w,e^h,e^s)=(3,3,1)$</span> <span class="markdown-them-math-inline">$21,21,1,1280$</span></li>
-<li>video <span class="markdown-them-math-inline">$(e^w,e^h,e^s)=(3,3,3)$</span> <span class="markdown-them-math-inline">$21,21,10,1280$</span></li>
-</ul>
-<p>We pre-train on <strong>64 A100 GPUs</strong> for <strong>two weeks</strong> with the layer <span class="markdown-them-math-inline">$L$</span> in  set to 24, an Adam optimizer with a learning rate of 1e-3, a batch size of 128, and warm-up 5% of a total of 50M steps. The final pre-trained model has a total number of 870M parameters.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B/" rel="tag">生成模型</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-594. 最长和谐子序列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/11/20/594.%20%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/" class="article-date">
-  <time class="dt-published" datetime="2021-11-20T04:54:37.000Z" itemprop="datePublished">2021-11-20</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E7%AE%97%E6%B3%95/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/11/20/594.%20%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/">594. 最长和谐子序列</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-harmonious-subsequence/">594. 最长和谐子序列 - 力扣 (LeetCode)  (leetcode-cn.com)</a></p>
-<p>和谐数组是指一个数组里元素的最大值和最小值之间的差别 正好是 <strong>1</strong>.</p>
-<p>现在, 给你一个整数数组<span class="markdown-them-math-inline">$ nums $</span>, 请你在所有可能的子序列中找到最长的和谐子序列的长度.</p>
-<p>数组的子序列是一个由数组派生出来的序列, 它可以通过删除一些元素或不删除元素、且不改变其余元素的顺序而得到.</p>
-        
-          <p class="article-more-link">
-            <a href="2021/11/20/594.%20%E6%9C%80%E9%95%BF%E5%92%8C%E8%B0%90%E5%AD%90%E5%BA%8F%E5%88%97/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" rel="tag">哈希表</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E6%9E%9A%E4%B8%BE/" rel="tag">枚举</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Delta-GAN-Encoder" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/11/18/Delta-GAN-Encoder/" class="article-date">
-  <time class="dt-published" datetime="2021-11-18T10:08:21.000Z" itemprop="datePublished">2021-11-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E8%AE%BA%E6%96%87/">论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/11/18/Delta-GAN-Encoder/">Delta-GAN-Encoder</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2111.08419.pdf">https://arxiv.org/pdf/2111.08419.pdf</a></p>
-<p>作者: Nir Diamant</p>
-<p>单位: Technion - Israel Institute of Technology</p>
-<h2 id="摘要">摘要</h2>
-<p>理解和控制生成模型的潜在空间是一项复杂的任务. 在本文中, 我们提出了一种新的学习方法来控制预训练GAN的潜在空间中的任何期望属性, 以便相应地编辑合成的和真实的数据样本. 我们进行Sim2Real learning, 依靠最小的样本来实现无限数量的连续精确编辑. 我们提出了一个基于Autoencoder的模型, 该模型学习编码图像之间变化的语义, 作为后来编辑新样本的基础, 实现精确的期望结果. 虽然以前的编辑方法依赖于潜在空间的已知结构(例如, StyleGAN中某些语义的线性), 但我们的方法本质上不需要任何结构约束. 我们在面部图像领域演示了我们的方法:编辑不同的表情、姿势和照明属性, 实现最先进的结果.</p>
-        
-          <p class="article-more-link">
-            <a href="2021/11/18/Delta-GAN-Encoder/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E8%A7%A3%E7%BA%A0%E7%BC%A0/" rel="tag">解纠缠</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E9%9D%A2%E9%83%A8%E7%BC%96%E8%BE%91/" rel="tag">面部编辑</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-SeCGAN" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/11/18/SeCGAN/" class="article-date">
-  <time class="dt-published" datetime="2021-11-18T08:40:02.000Z" itemprop="datePublished">2021-11-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E8%AE%BA%E6%96%87/">论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/11/18/SeCGAN/">SeCGAN: Parallel Conditional Generative Adversarial Networks for Face Editing via Semantic Consistency</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2111.09298">https://arxiv.org/pdf/2111.09298</a></p>
-<p>作者: Jiaze Sun</p>
-<p>单位: Imperial College London</p>
-<h2 id="摘要">摘要</h2>
-<p>近年来, 语义引导条件生成对抗网络(cGANs)已成为一种流行的人脸编辑方法. 然而, 现有的大多数方法都将语义掩码作为直接的条件输入引入到生成器中, 并且常常要求目标掩码在RGB空间中执行相应的转换. 我们提出了SeCGAN, 一种新的标签引导的cGAN, 可以利用语义信息编辑人脸图像, 而不需要指定目标语义遮罩. 在训练过程中, SeCGAN有两个并行操作的生成器和判别器分支, 一个用于翻译RGB图像, 另一个用于语义掩码. 为了将两个分支以一种互惠的方式连接起来, 我们引入了一个语义一致性损失, 它约束两个分支具有一致的语义输出. 虽然两个分支都需要在训练期间, RGB分支是我们的主要网络和语义分支是不需要推理. 我们在CelebA和CelebA- hq上的结果表明, 我们的方法能够生成具有更准确属性的面部图像, 在目标属性识别率方面优于竞争基准, 同时保持质量指标, 如自监督FID和IS.</p>
-        
-          <p class="article-more-link">
-            <a href="2021/11/18/SeCGAN/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/GAN/" rel="tag">GAN</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E9%9D%A2%E9%83%A8%E7%BC%96%E8%BE%91/" rel="tag">面部编辑</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-563. 二叉树的坡度" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/11/18/563.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%9D%A1%E5%BA%A6/" class="article-date">
-  <time class="dt-published" datetime="2021-11-18T05:51:24.000Z" itemprop="datePublished">2021-11-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E7%AE%97%E6%B3%95/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/11/18/563.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%9D%A1%E5%BA%A6/">563. 二叉树的坡度</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/binary-tree-tilt/">563. 二叉树的坡度 - 力扣 (LeetCode)  (leetcode-cn.com)</a></p>
-<p>给定一个二叉树, 计算 <strong>整个树</strong> 的坡度 .</p>
-<p>一个树的 <strong>节点的坡度</strong>定义即为, 该节点左子树的节点之和和右子树节点之和的 <strong>差的绝对值</strong> . 如果没有左子树的话, 左子树的节点之和为 0 ; 没有右子树的话也是一样. 空结点的坡度是 0 .</p>
-<p><strong>整个树</strong> 的坡度就是其所有节点的坡度之和.</p>
-        
-          <p class="article-more-link">
-            <a href="2021/11/18/563.%20%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%9D%A1%E5%BA%A6/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="tag">二叉树</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/" rel="tag">深度优先搜索</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-318. 最大单词长度乘积" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/11/17/318.%20%E6%9C%80%E5%A4%A7%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E4%B9%98%E7%A7%AF/" class="article-date">
-  <time class="dt-published" datetime="2021-11-17T04:58:07.000Z" itemprop="datePublished">2021-11-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E7%AE%97%E6%B3%95/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/11/17/318.%20%E6%9C%80%E5%A4%A7%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E4%B9%98%E7%A7%AF/">318. 最大单词长度乘积</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="题目">题目</h2>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-product-of-word-lengths/">318. 最大单词长度乘积 - 力扣 (LeetCode)  (leetcode-cn.com)</a></p>
-<p>给定一个字符串数组 words, 找到 length(word[i]) * length(word[j]) 的最大值, 并且这两个单词不含有公共字母. 你可以认为每个单词只包含小写字母. 如果不存在这样的两个单词, 返回 0.</p>
-        
-          <p class="article-more-link">
-            <a href="2021/11/17/318.%20%E6%9C%80%E5%A4%A7%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E4%B9%98%E7%A7%AF/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E4%BD%8D%E8%BF%90%E7%AE%97/" rel="tag">位运算</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E6%A8%A1%E6%8B%9F/" rel="tag">模拟</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-中共中央关于党的百年奋斗重大成就和历史经验的决议" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/11/17/%E4%B8%AD%E5%85%B1%E4%B8%AD%E5%A4%AE%E5%85%B3%E4%BA%8E%E5%85%9A%E7%9A%84%E7%99%BE%E5%B9%B4%E5%A5%8B%E6%96%97%E9%87%8D%E5%A4%A7%E6%88%90%E5%B0%B1%E5%92%8C%E5%8E%86%E5%8F%B2%E7%BB%8F%E9%AA%8C%E7%9A%84%E5%86%B3%E8%AE%AE/" class="article-date">
-  <time class="dt-published" datetime="2021-11-17T04:23:33.000Z" itemprop="datePublished">2021-11-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E6%94%BF%E6%B2%BB/">政治</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/11/17/%E4%B8%AD%E5%85%B1%E4%B8%AD%E5%A4%AE%E5%85%B3%E4%BA%8E%E5%85%9A%E7%9A%84%E7%99%BE%E5%B9%B4%E5%A5%8B%E6%96%97%E9%87%8D%E5%A4%A7%E6%88%90%E5%B0%B1%E5%92%8C%E5%8E%86%E5%8F%B2%E7%BB%8F%E9%AA%8C%E7%9A%84%E5%86%B3%E8%AE%AE/">中共中央关于党的百年奋斗重大成就和历史经验的决议</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>(2021年11月11日中国共产党第十九届中央委员会第六次全体会议通过)</p>
-<h3 id="序言">序言</h3>
-<p>中国共产党自一九二一年成立以来, 始终把为中国人民谋幸福、为中华民族谋复兴作为自己的初心使命, 始终坚持共产主义理想和社会主义信念, 团结带领全国各族人民为争取民族独立、人民解放和实现国家富强、人民幸福而不懈奋斗, 已经走过一百年光辉历程.</p>
-<p>一百年来, 党领导人民浴血奋战、百折不挠, 创造了新民主主义革命的伟大成就; 自力更生、发愤图强, 创造了社会主义革命和建设的伟大成就; 解放思想、锐意进取, 创造了改革开放和社会主义现代化建设的伟大成就; 自信自强、守正创新, 创造了新时代中国特色社会主义的伟大成就. 党和人民百年奋斗, 书写了中华民族几千年历史上最恢宏的史诗.</p>
-<p>总结党的百年奋斗重大成就和历史经验, 是在建党百年历史条件下开启全面建设社会主义现代化国家新征程、在新时代坚持和发展中国特色社会主义的需要; 是增强政治意识、大局意识、核心意识、看齐意识, 坚定道路自信、理论自信、制度自信、文化自信, 做到坚决维护习近平同志党中央的核心、全党的核心地位, 坚决维护党中央权威和集中统一领导, 确保全党步调一致向前进的需要; 是推进党的自我革命、提高全党斗争本领和应对风险挑战能力、永葆党的生机活力、团结带领全国各族人民为实现中华民族伟大复兴的中国梦而继续奋斗的需要. 全党要坚持唯物史观和正确党史观, 从党的百年奋斗中看清楚过去我们为什么能够成功、弄明白未来我们怎样才能继续成功, 从而更加坚定、更加自觉地践行初心使命, 在新时代更好坚持和发展中国特色社会主义.</p>
-<p>一九四五年党的六届七中全会通过的《关于若干历史问题的决议》、一九八一年党的十一届六中全会通过的《关于建国以来党的若干历史问题的决议》, 实事求是总结党的重大历史事件和重要经验教训, 在重大历史关头统一了全党思想和行动, 对推进党和人民事业发挥了重要引领作用, 其基本论述和结论至今仍然适用.</p>
-        
-          <p class="article-more-link">
-            <a href="2021/11/17/%E4%B8%AD%E5%85%B1%E4%B8%AD%E5%A4%AE%E5%85%B3%E4%BA%8E%E5%85%9A%E7%9A%84%E7%99%BE%E5%B9%B4%E5%A5%8B%E6%96%97%E9%87%8D%E5%A4%A7%E6%88%90%E5%B0%B1%E5%92%8C%E5%8E%86%E5%8F%B2%E7%BB%8F%E9%AA%8C%E7%9A%84%E5%86%B3%E8%AE%AE/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E6%94%BF%E6%B2%BB/" rel="tag">政治</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Attention Mechanisms in Computer Vision" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="2021/11/17/Attention%20Mechanisms%20in%20Computer%20Vision/" class="article-date">
-  <time class="dt-published" datetime="2021-11-17T02:48:46.000Z" itemprop="datePublished">2021-11-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="categories/%E8%AE%BA%E6%96%87/">论文</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="2021/11/17/Attention%20Mechanisms%20in%20Computer%20Vision/">Attention Mechanisms in Computer Vision A Survey</a>
-    </h1>
-  
-
-      </header>
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>论文地址: <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2111.07624.pdf">2111.07624.pdf (arxiv.org)</a></p>
-<p>作者: Meng-Hao Guo , Tsinghua University</p>
-<h2 id="简介">简介</h2>
-<p>人类可以自然有效地在复杂的场景中找到突出的区域. 在这种观察的推动下, 注意机制被引入到计算机视觉中, 目的是模仿人类视觉系统的这方面. 这种注意机制可以看作是一个基于输入图像特征的动态权值调整过程. 注意机制在图像分类、目标检测、语义分割、视频理解、图像生成、三维视觉、多模态任务和自监督学习等视觉任务中取得了巨大的成功. 本文综述了计算机视觉中的各种注意机制, 并对其进行了分类, 如通道注意、空间注意、时间注意和分支注意;一个相关的repositoryhttps://github.com/MenghaoGuo/Awesome-Vision-Attentionsis专门用于收集相关的工作. 本文还提出了注意机制研究的未来方向.</p>
-        
-          <p class="article-more-link">
-            <a href="2021/11/17/Attention%20Mechanisms%20in%20Computer%20Vision/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6/" rel="tag">注意力机制</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="tags/%E7%BB%BC%E8%BF%B0/" rel="tag">综述</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><a class="extend next" rel="next" href="page/2/">下一页 &raquo;</a>
-  </nav>
-
-</section>
-        
+      <div class="sec-wrapper home-wrapper" id="home">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="picture">
+              <div class="col-sm-auto col-wrapper">
+                <img src="images/WechatIMG773.jpeg">
+              </div>
+            </div>
+            <div class="col-sm col-wrapper">
+              <div class="description">
+                <h1 class="name">Haofan Wang</h1>
+<!--                 <div>Work Email: wanghaofan (at) xiaohongshu.com</div>
+                <div>School Email: haofanw (at) alumni.cmu.edu</div> -->
+                <div>Personal Email: haofanwang.ai (at) gmail.com</div>
+                <ul class="social-icon">
+                  <li><a title="Google Scholar" href="https://scholar.google.com/citations?hl=en&user=EaMsuB0AAAAJ"><i class="ai ai-google-scholar" aria-hidden="true"></i></a></li>
+                  <li><a title="Linkedin" href="https://www.linkedin.com/in/haofan-frank-wang-366782130/"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                  <li><a title="Github" href="https://github.com/haofanwang"><i class="fab fa-github" aria-hidden="true"></i></a></li>
+                  <li><a title="Twitter" href="https://twitter.com/Haofan_Wang"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                  <li><a title="Xiaohongshu" href="https://www.xiaohongshu.com/user/profile/5e12188a0000000001000b1a"><i class="fa fa-camera-retro" aria-hidden="true"></i></a></li>
+                  <li><a title="Huggingface" href="https://huggingface.co/wanghaofan/"><i class="fas fa-smile" aria-hidden="true"></i></a></li>
+                  <li><a title="Zhihu" href="https://www.zhihu.com/people/haofanwang/"><i class="fab fa-zhihu" aria-hidden="true"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg col-wrapper">
+              <div class="Recent interests">
+                <div class="section-title">Research Interests</div>
+                <ul>
+                  <li>Consistent Image Generation</li>
+                  <li>Temporally Consistent Video Animation</li>
+                  <li>Building exciting, shippable AI Products and Decentralized Platform</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
       
-      &copy; 2021 Zhaojiangwei<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a><br>
-    </div>
-  </div>
-</footer>
+      <div class="sec-wrapper bio-wrapper" id="bio">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Biography</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-wrapper">
+              
+               <p> 
+               Haofan Wang (王浩帆) is a researcher at <a href="https://github.com/instantX-research">InstantX</a>, working primarily on controllable and conditional content generation (AIGC). 
+               Before that, he worked at MMU, Kuaishou. 
+               He obtained master degree from <a href="https://www.ece.cmu.edu">Carnegie Mellon University</a>.
+               He visited <a href="https://cemse.kaust.edu.sa/ivul">Image and Video Understanding Laboratory (IVUL)</a>, King Abdullah University of Science and Technology (KAUST) in 2020 and <a href="https://cs.rice.edu/~xh37/research.html"> DATA Lab, Texas A&M University</a> in 2019, repectively.
+               He studied at UC Berkeley in 2017 as a visiting student, and worked as undergraduate research assistant at <a href="https://rise.cs.berkeley.edu/"> Berkeley RISE Lab</a>, collaborating with <a href="https://github.com/Corey-Zumar">Corey Zumar</a> on <a href="https://github.com/ucbrise/clipper">Clipper</a>.
+               He also spent time at OpenMined, RealAI, Everspry, Horizon Robotics and Institute of Software Chinese Academy of Sciences.
+               His highlighted works inlcude <a href="https://instantstyle.github.io/">InstantStyle</a>, <a href="https://instantid.github.io/">InstantID</a>, <a href="https://openaccess.thecvf.com/content_CVPRW_2020/html/w1/Wang_Score-CAM_Score-Weighted_Visual_Explanations_for_Convolutional_Neural_Networks_CVPRW_2020_paper.html
+">Score-CAM</a>.
+               He accepts open-source sponsors via <a href="https://ko-fi.com/instantx">Ko-fi</a>.
+              </p>
+                 
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="sec-wrapper pub-wrapper" id="pub">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Selected Publications (<a href="https://scholar.google.com/citations?hl=en&user=EaMsuB0AAAAJ">Full List</a>)</div>
+            </div>
+          </div>
 
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="https://haofanwang.github.io/"><img src="images/InstantStyle.png" alt="[motion]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://instantstyle.github.io//">
+                  InstantStyle : Free Lunch towards Style-Preserving in Text-to-Image Generation
+                </a>
+              </div>
+              <div class="authors">
+                <me>Haofan Wang<sup>*</sup></me>,
+                Qixun Wang,
+                Xu Bai,
+                Zekui Qing,
+                and
+                Anthony Chen. <sup>*</sup> means corresponding author.
+              </div>
+              <div>Arxiv 2024</div>
+              <a href="https://instantstyle.github.io/">[Project Page]</a>
+              <a href="https://github.com/InstantStyle/InstantStyle">[Code]</a>
+            </div>
+
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="https://haofanwang.github.io/"><img src="images/famous.png" alt="[motion]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://instantid.github.io//">
+                  InstantID : Zero-shot Identity-Preserving Generation in Seconds
+                </a>
+              </div>
+              <div class="authors">
+                Qixun Wang,
+                Xu Bai,
+                <me>Haofan Wang<sup>*</sup></me>,
+                Zekui Qing,
+                and
+                Anthony Chen. <sup>*</sup> means corresponding author.
+              </div>
+              <div>Arxiv 2024</div>
+              <a href="https://instantid.github.io/">[Project Page]</a>
+              <a href="https://github.com/InstantID/InstantID">[Code]</a>
+            </div>
+          
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="https://antonioo-c.github.io/projects/split-ensemble.html"><img src="https://antonioo-c.github.io/projects/static/images/splitensemble/subtask.png" alt="[motion]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://antonioo-c.github.io/projects/split-ensemble.html">
+                  Split-Ensemble: Efficient OOD-aware Ensemble via Task and Model Splitting
+                </a>
+              </div>
+              <div class="authors">
+                Anthony Chen, 
+                Huanrui Yang, 
+                Yulu Gan, 
+                Denis A Gudovskiy, 
+                Zhen Dong,
+                <me>Haofan Wang</me>,
+                Tomoyuki Okuno, 
+                Yohei Nakata, 
+                Shanghang Zhang, 
+                and
+                Kurt Keutzer.
+              </div>
+              <div>ICML 2024</div>
+              <a href="https://antonioo-c.github.io/projects/split-ensemble.html">[Paper]</a>
+              <a href="https://antonioo-c.github.io/projects/split-ensemble.html">[Project Page]</a>
+            </div>
+
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="https://haofanwang.github.io/"><img src="https://media.icml.cc/Conferences/CVPR2024/img/homepage_image.jpg" alt="[motion]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://haofanwang.github.io/">
+                  Multimodal Sense-Informed Forecasting of 3D Human Motions
+                </a>
+              </div>
+              <div class="authors">
+                Zhenyu Lou,
+                Qiongjie Cui,
+                <me>Haofan Wang</me>,
+                Xu Tang,
+                and Hong Zhou.
+              </div>
+              <div>CVPR 2024</div>
+              <a href="https://haofanwang.github.io">[Paper]</a>
+              <a href="https://haofanwang.github.io">[Project Page]</a>
+            </div>
+            
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="https://haofanwang.github.io/"><img src="images/aaai2024.png" alt="[motion]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://haofanwang.github.io/">
+                  Expressive Forecasting of 3D Whole-body Human Motions
+                </a>
+              </div>
+              <div class="authors">
+                Pengxiang Ding,
+                Qiongjie Cui,
+                <me>Haofan Wang</me>,
+                Min Zhang
+                Mengyuan Liu
+                and
+                Donglin Wang.
+              </div>
+              <div>AAAI 2024</div>
+              <a href="https://haofanwang.github.io">[Paper]</a>
+              <a href="https://haofanwang.github.io">[Project Page]</a>
+            </div>
+          
+
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="https://idc-flash.github.io/InterScene"><img src="https://idc-flash.github.io/InterScene/assets/teaser.png" alt="[motion]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://idc-flash.github.io/InterScene/">
+                  Synthesizing Physically Plausible Human Motions in 3D Scenes
+                </a>
+              </div>
+              <div class="authors">
+                <a href="https://liangpan99.github.io/">Liang Pan</a>,
+                Jingbo Wang, 
+                Buzhen Huang, 
+                Junyu Zhang,
+                <me>Haofan Wang</me>,
+                Xu Tang, and Yangang Wang.
+              </div>
+              <div>3DV 2024</div>
+              <a href="https://arxiv.org/abs/2308.09036">[Paper]</a>
+              <a href="https://github.com/IDC-Flash/InterScene">[Code]</a>
+              <a href="https://idc-flash.github.io/InterScene">[Project Page]</a>
+            </div>
+          
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="https://haofanwang.github.io/"><img src="images/test_time_personalizable.png" alt="[motion]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://haofanwang.github.io/">
+                  Test-time Personalizable Forecasting of 3D Human Poses
+                </a>
+              </div>
+              <div class="authors">
+                <a href="https://keras.me/">Qiongjie Cui</a>,
+                Huaijiang Sun,
+                Jianfeng Lu,
+                Weiqing Li,
+                Bin Li,
+                and
+                <me>Haofan Wang</me>.
+              </div>
+              <div>ICCV 2023, Poster</div>
+              <a href="https://github.com/haofanwang/haofanwang.github.io/blob/master/documents/HP-TTP.pdf">[Paper]</a>
+              <a href="https://sites.google.com/view/hp-ttp">[Project Page]</a>
+            </div>
+
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="https://arxiv.org/abs/2212.02469"><img src="images/elicit.png" alt="[elict]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://arxiv.org/abs/2212.02469">
+                  One-shot Implicit Animatable Avatars with Model-based Priors
+                </a>
+              </div>
+              <div class="authors">
+                <a href="https://github.com/huangyangyi">Yangyi Huang<sup>*</sup></a>,
+                <a href="https://xyyhw.top/">Hongwei Yi<sup>*</sup></a>,
+                <a href="https://wyliu.com/">Weiyang Liu</a>,
+                <me>Haofan Wang</me>,
+                <a href="https://scholar.google.com/citations?user=AqDe35sAAAAJ/">Boxi Wu</a>,
+                <a href="https://www.wenxiaowang.com/">Wenxiao Wang</a>,
+                <a href="https://scholar.google.com/citations?user=Zmvq4KYAAAAJ">Binbin Lin</a>,
+                <a href="https://www.linkedin.cn/incareer/in/%E5%BE%B7%E5%85%B5-%E5%BC%A0-a6451aa9">Debing Zhang</a>,
+                and
+                <a href="http://www.cad.zju.edu.cn/home/dengcai/">Cai Deng</a>. <sup>*</sup> means equal contribution.
+              </div>
+              <div>ICCV 2023, Poster</div>
+              <a href="https://arxiv.org/abs/2212.02469">[Paper]</a>
+              <a href="https://elicit3d.github.io/">[Project Page]</a>
+            </div>
+          
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href=""><img src="images/show_me_a_video.png" alt="[tmm]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://ieeexplore.ieee.org/document/10195243">
+                  Show Me a Video: A Large-Scale Narrated Video Dataset for Coherent Story Illustration
+                </a>
+              </div>
+              <div class="authors">
+                <a href="https://yulu.net.cn/">Yu Lu</a>,
+                Feiyue Ni,
+                <me>Haofan Wang</me>,
+                Xiaofeng Guo,
+                Linchao Zhu,
+                Zongxin Yang,
+                Ruihua Song,
+                Lele Cheng,
+                and
+                Yi Yang.
+              </div>
+              <div>IEEE Transactions on Multimedia (TMM), 2023</div>
+              <a href="https://ieeexplore.ieee.org/document/10195243/">[Paper]</a>
+              <a href="https://nfy-dot.github.io/CVSV-dataset/">[Project Page]</a>
+            </div>
+          
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                 <a href=""><img src="images/kgrn.png" alt="[kgrn]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://haofanwang.github.io">
+                  Knowledge-aware Global Reasoning for Situation Recognition
+                </a>
+              </div>
+              <div class="authors">
+                <a href="https://dblp.org/pid/80/3176.html/">Weijiang Yu<sup>*</sup></a>,
+                <me>Haofan Wang</me><sup>*</sup>,
+                <a href="https://ghli.org/">Guohao Li</a>,
+                <a href="https://cse.sysu.edu.cn/content/2484">Nong Xiao</a>,
+                and
+                <a href="https://www.bernardghanem.com/">Bernard Ghanem</a>. <sup>*</sup> means equal contribution.
+              </div>
+              <div>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI) , 2023</div>
+              <a href="https://repository.kaust.edu.sa/bitstream/handle/10754/688151/Knowledge-aware_Global_Reasoning_for_Situation_Recognition.pdf?sequence=1&isAllowed=y">[Paper]</a>
+              <a href="https://github.com/haofanwang/KGRN-SR">[Code]</a>
+            </div>
+
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href=""><img src="images/clip.png" alt="[smooth]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="">
+                  ECLIP: Efficient Contrastive Language-Image Pretraining via Ensemble Confidence Learning and Masked Language Modeling
+                </a>
+              </div>
+              <div class="authors">
+                Jue Wang<sup>*</sup>,
+                <me>Haofan Wang<sup>*</sup></me>,
+                <a href="https://weijiawu.github.io/">Weijia Wu</a>,
+                <a href="https://scholar.google.com/citations?user=z-b7JmcAAAAJ&hl=en">Jincan Deng</a>,
+                <a href="https://yulu.net.cn/">Yu Lu</a>,
+                Xiaofeng Guo,
+                and
+                <a href="https://www.linkedin.cn/incareer/in/%E5%BE%B7%E5%85%B5-%E5%BC%A0-a6451aa9">Debing Zhang</a>. <sup>*</sup> means equal contribution.
+              </div>
+              <div>ICML 2022 Pre-training Workshop </div>
+              <a href="https://openreview.net/pdf?id=5IFFLY4JR24">[Paper]</a>
+              <a href="https://openreview.net/pdf?id=5IFFLY4JR24">[Code]</a>
+              [Citation: 11]
+            </div>
+            
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="https://arxiv.org/pdf/2006.06643v1.pdf"><img src="images/smooth.png" alt="[smooth]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://arxiv.org/pdf/2006.06643v1.pdf">
+                  Smoothed Geometry for Robust Attribution
+                </a>
+              </div>
+              <div class="authors">
+                <a href="https://sites.google.com/west.cmu.edu/zifan-wang/home">Zifan Wang</a>,
+                  <me>Haofan Wang</me>,
+                  Shakul Ramkumar,
+                  <a href="https://www.cs.cmu.edu/~mfredrik/">Matt Fredrikson</a>,
+                  <a href="https://piotr.mardziel.com">Piotr Mardziel</a>,
+                  and
+                  <a href="https://www.andrew.cmu.edu/user/danupam/">Anupam Datta</a>
+              </div>
+              <div>NeurIPS 2020, Poster</div>
+              <a href="https://papers.nips.cc/paper/2020/file/9d94c8981a48d12adfeecfe1ae6e0ec1-Paper.pdf">[Paper]</a>
+              <a href="https://zifanw.github.io/resource/doc/smooth_poster.pdf">[Poster]</a>
+              <a href="https://github.com/zifanw/smoothed_geometry">[Code]</a>
+              [Citation: 29]
+            </div>
+          
+          
+          <div class="row align-items-center section-item">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+              <div class="figure">
+                <a href="http://openaccess.thecvf.com/content_CVPRW_2020/html/w1/Wang_Score-CAM_Score-Weighted_Visual_Explanations_for_Convolutional_Neural_Networks_CVPRW_2020_paper.html"><img src="images/Score-CAM.png" alt="[Score-CAM]"></a>
+              </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="http://openaccess.thecvf.com/content_CVPRW_2020/papers/w1/Wang_Score-CAM_Score-Weighted_Visual_Explanations_for_Convolutional_Neural_Networks_CVPRW_2020_paper.pdf">
+                  Score-CAM: Score-Weighted Visual Explanations for Convolutional Neural Networks
+                </a>
+              </div>
+              <div class="authors">
+                <me>Haofan Wang</me>,
+                <a href="https://sites.google.com/west.cmu.edu/zifan-wang/home">Zifan Wang</a>,
+                <a href="http://people.tamu.edu/~dumengnan/">Mengnan Du</a>,
+                <a href="http://people.tamu.edu/~nacoyang/">Fan Yang</a>,
+                Zijian Zhang,
+                <a href="https://scholar.google.com/citations?user=JXRL-rwAAAAJ&hl=en">Sirui Ding</a>,
+                <a href="https://piotr.mardziel.com/">Piotr Mardziel</a>
+                and
+                <a href="http://faculty.cs.tamu.edu/xiahu/">Xia (Ben) Hu</a>
+              </div>
+              <div>IEEE CVPR 2020 Workshop on Fair, Data Efficient and Trusted Computer Vision</div>
+              <a href="https://github.com/haofanwang/Score-CAM">[Project Page]</a>
+              <a href="http://openaccess.thecvf.com/content_CVPRW_2020/papers/w1/Wang_Score-CAM_Score-Weighted_Visual_Explanations_for_Convolutional_Neural_Networks_CVPRW_2020_paper.pdf">[Paper]</a>
+              <a href="https://zifanw.github.io/resource/Score_CAM/slides.pdf">[Slides]</a>
+              <a href="https://mp.weixin.qq.com/s/naS_X8PdKQqveD5hbhMUoQ">[News]</a>
+              [Citation: 531]
+              <iframe src="https://ghbtns.com/github-btn.html?user=haofanwang&repo=Score-CAM&type=star&count=true&size=large" frameborder="0" scrolling="0" width="150" height="30" title="GitHub"></iframe>
+            </div>
+            
+            
+<!--             <div class="col-xs-12 col-md-3 col-lg-3 col-wrapper">
+                <div class="figure">
+                  <a href="https://arxiv.org/abs/1901.06778"><img src="images/HeadPose.png" alt="[HeadPose]"></a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-lg-9 col-wrapper">
+              <div class="title">
+                <a href="https://arxiv.org/abs/1901.06778">
+                  Hybrid Coarse-fine Classification for Head Pose Estimation
+                </a>
+              </div>
+              <div class="authors">
+                <me>Haofan Wang</me>,
+                Zhenghua Chen,
+                and
+                <a href="https://scholar.google.com/citations?user=Ji5ISB8AAAAJ&hl=en">Yi Zhou</a>
+              </div>
+              <div>ArXiv 1901.06778</div>
+              <a href="https://github.com/haofanwang/accurate-head-pose">[Project Page]</a>
+              <a href="https://arxiv.org/abs/1901.06778">[Paper]</a>
+              [Citation: 12]
+              <iframe src="https://ghbtns.com/github-btn.html?user=haofanwang&repo=accurate-head-pose&type=star&count=true&size=large" frameborder="0" scrolling="0" width="150" height="30" title="GitHub"></iframe>
+            </div> -->
+
+          </div>
+        </div>
+      </div>
+
+      </div>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="index.html" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav>
     
+    
+     <div class="sec-wrapper bio-wrapper" id="Talks">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Talks</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-wrapper">
+              <li>
+                [03/2024] OpenMMLab & REDTech & Extreme MART. [<a href="https://www.bilibili.com/video/BV1HH4y177T5/?spm_id_from=333.337.search-card.all.click&vd_source=1020eacdf7d73b4a5e3c52f8671d3f5a">Video</a>]
+              </li>
+              <li>
+                [02/2024] MMLab@NTU & ShowLab@NUS. <a href="https://docs.google.com/presentation/d/1kTofTYtqEx1bue7TSGVyW3wDDbzifZ5KqQRLE6XiU1k/edit?usp=sharing">InstantID: Zero-shot Identity-Preserving Generation in Seconds</a>, [<a href="https://www.youtube.com/watch?v=3HV3ctcr-Fg&t=1047s">Video</a>]
+              </li>
+              <li>
+                [12/2022] Xiaohongshu. <a href="https://drive.google.com/file/d/1ZPGANEL2R74-QwmUCPwg3aFKAzs2K3oN/view?usp=sharing">A Review of Recent Progress in AIGC and its Applications</a>
+              </li>
+              <li>
+                [06/2021] MMU, Kuaishou. <a href="https://drive.google.com/file/d/1z6hpFw9-8V7hhl-sJK5-f2FVevnQYosC/view?usp=sharing">An Overview of Large Scale Pre-Training</a>
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+<!--      <div class="sec-wrapper bio-wrapper" id="Alumni Interns">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Alumni Interns</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-wrapper">
+              <li>
+               <a href="https://huangyangyi.github.io/">Yangyi Huang</a> (MS@ZJU) -> Next: Research Intern@NVIDIA
+              </li>
+              <li>
+               <a href="https://liangpan99.github.io/">Liang Pan</a> (MS@SEU) -> Next: Research Intern@Shanghai AI Lab
+              </li>
+              <li>
+               <a href="https://dingpx.github.io/">Pengxiang Ding</a> (MS@BUPT) -> Next: Ph.D@Westlake University
+              </li>
+              <li>
+               Yifan Yao (MS@SJTU) -> Next:China Life Insurance Company Limited
+              </li>
+            </div>
+          </div>
+        </div>
+      </div> -->
+          
+          
+    <div class="sec-wrapper bio-wrapper" id="Teaching">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Teaching</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-wrapper">
+              <li>
+                Guest Lecture of <a href="https://www.comp.nus.edu.sg/~youy/teach/CS5260.pdf" target="_blank">CS5260: Neural Networks and Deep Learning II</a>, Prof: <a href="https://www.comp.nus.edu.sg/~youy/">Yang You</a>, Spring 2024, National University of Singapore
+              </li>
+              <li>
+                TA of <a href="https://courses.ece.cmu.edu/18793" target="_blank">18-793 Image and Video Processing</a>, Prof: <a href="http://users.ece.cmu.edu/~saswin/">Aswin C Sankaranarayanan</a>, Summer 2020, Carnegie Mellon University
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <div class="sec-wrapper bio-wrapper" id="Services">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Professional Services</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-wrapper">
+              <li>
+                  Journal Reviewer: IJCV, TMM, TKDD, AI Communications
+              </li>
+              <li>
+                  Conference Reviewer: NeurIPS, ICLR, ICML, CVPR, ICCV, ECCV, XAI4CV@CVPR, PRCV
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+          
+<!--     <div class="sec-wrapper bio-wrapper" id="Friends">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Links</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-wrapper">
+              <li>
+                Industry: <a href="https://scholar.google.com/citations?hl=en&user=vYGvLbwAAAAJ&view_op=list_works&sortby=pubdate">Vincent Lu(Midjourney)</a>, <a href="https://scholar.google.com/citations?user=grP24aAAAAAJ&hl=zh-CN">Xu Tang(Xiaohongshu)</a>, <a href="https://echo960.github.io/">Chunhui Liu(Kuaishou)</a>, <a href="https://dblp.org/pid/247/7511.html">Tianxiao Fu(Inspir.ai)</a>, <a href="https://tushar-semwal.github.io/">Tushar Semwal(Microsoft)</a>
+              </li>
+              <li>
+                Academia: <a href="https://scholar.google.com/citations?user=6aYncPAAAAAJ&hl=en">Shentong Mo(MBZUAI)</a>, <a href="https://xyyhw.top/">Hongwei Yi(Max Planck Institute)</a>, <a href="https://keras.me/">Qiongjie Cui(NJUST)</a>, <a href="https://antonioo-c.github.io/">Anthony Chen(PKU)</a>, <a href="https://dblp.org/pid/80/3176.html/">Weijiang Yu(SYSU)</a>, <a href="https://yulu.net.cn/">Yu Lu(UTS)</a>, <a href="https://weijiawu.github.io/">Weijia Wu(ZJU)</a>, <a href="https://jlian2.github.io//">Jiachen Lian(UC Berkeley)</a>, <a href="https://sites.google.com/west.cmu.edu/zifan-wang/home">Zifan Wang(CMU)</a>, <a href="https://ghli.org">Guohao Li(KAUST)</a>, <a href="https://mengnandu.com/">Mengnan Du(TAMU)</a>
+              </li>
+              
+            </div>
+          </div>
+        </div>
+      </div> -->
+      
+    <div class="sec-wrapper bio-wrapper" id="bio">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Career Trajectory</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-wrapper">
+              <p> 
+                Kuaishou (2021-2022) --> Xiaohongshu (2022-2024) --> Stealth Startup (2024-) --> What's NeXT? --> Digital Nomad (203x)
+              </p> 
+                
+            </div>
+          </div>
+        </div>
+      </div>
+   
+    <div class="sec-wrapper bio-wrapper" id="bio">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col col-wrapper">
+              <div class="section-title">Misc</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col col-wrapper">
+              <p> 
+                Piano Level 7 (Roland HP704), Scuba Diving (AOW), Snowboarding (elementatry), Amateur photographer (Sony RX100M5, Mavic Air, Instax Mini90, Osmo Pocket3), Janpanese (elementary), US Stock player
+              </p> 
+                
+            </div>
+          </div>
+        </div>
+      </div>
 
+        
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Bootstrap JS -->
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <!-- Popper before Bootstrap -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-<script src="js/jquery-1.4.3.min.js"></script>
-
-
-  
-<script src="fancybox/jquery.fancybox-1.3.4.js"></script>
-
-
-
-
-<script src="js/script.js"></script>
-
-
-
-
-
-
-<script>
-  MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']]
-    },
-    svg: {
-      fontCache: 'global'
-    }
-  };
-</script>
-</script>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-</script>
-
-  </div>
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>
